@@ -5,7 +5,7 @@ package com.t25.hbv601g.timerunner.entities;
  */
 
 public class Settings {
-    
+
     private boolean mLayoutSettings;
     private boolean mNotificationsOn;
     private boolean mVibrateOn;
@@ -16,6 +16,13 @@ public class Settings {
         mNotificationsOn = notificationsOn;
         mVibrateOn = vibrateOn;
         mSoundOn = soundOn;
+    }
+
+    public Settings() {
+        mLayoutSettings = true;
+        mNotificationsOn = true;
+        mVibrateOn = true;
+        mSoundOn = true;
     }
 
     public boolean isLayoutSettings() {
