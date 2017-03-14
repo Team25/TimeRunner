@@ -53,6 +53,16 @@ public class UserLocalStorage {
         return mUserLocalDatabase.getString(TOKEN_KEY,null);
     }
 
+    public boolean removeToken() {
+        mUserLocalDatabase.edit()
+                .remove(TOKEN_KEY)
+                .apply();
+
+        // TODO taka þetta burt og breyta return type í void, bara fyrir test
+        if (getToken() == null) return true;
+        else return false;
+    }
+
     public void saveSettings(Settings settings){
         mUserLocalDatabase.edit()
                 .putString(SETTINGS_KEY, new Gson().toJson(settings))

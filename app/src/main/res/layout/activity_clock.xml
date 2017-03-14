@@ -28,4 +28,22 @@
         android:layout_marginBottom="96dp"
         android:text="Some shit"
         android:textSize="18dp"/>
+
+    <Button
+        android:id="@+id/btn_delete_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="86dp"
+        android:text="Delete token"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/lab_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/employee_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
+        android:text="Your token:" />
 </RelativeLayout>

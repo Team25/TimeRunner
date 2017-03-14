@@ -44,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginService = new LoginService(this);
 
+        mLoginService.isLoggedIn();
+
         mForgotPassword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

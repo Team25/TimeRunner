@@ -10,9 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +54,34 @@ public class NetworkManager {
         return mQueue;
     }
 
-    public void login(String username, String password, final VolleyCallback callback) {
+    public void isValidToken(String token, final TokenValidityCallback callback) {
+        String tokenPath = String.format("apptoken?token=%s", token);;
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (Request.Method.GET, mServerUrl + tokenPath, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response){
+                        boolean isValid = false;
+                        try {
+                            isValid = response.getBoolean("valid");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            callback.onFailure("network error occurred."); // string skrá
+                        }
+
+                        callback.onSuccess(isValid);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        callback.onFailure(error.toString());
+                    }
+                }
+                );
+        mQueue.add(jsonRequest);
+    }
+
+    public void login(String username, String password, final LoginCallback callback) {
         String loginPath = String.format("applogin?userName=%s&password=%s", username, password);
 
         StringRequest stringRequest = new StringRequest
