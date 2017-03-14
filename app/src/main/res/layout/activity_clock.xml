@@ -10,4 +10,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.t25.hbv601g.timerunner.ClockActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="You've made it to Clock Activity!"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:id="@+id/employee_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="96dp"
+        android:text="Some shit"
+        android:textSize="18dp"/>
 </RelativeLayout>

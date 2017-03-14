@@ -1,5 +1,7 @@
 package com.t25.hbv601g.timerunner.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by dingo on 13.3.2017.
  */

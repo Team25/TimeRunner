@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.entities.Settings;
 
+import org.json.JSONObject;
+
 /**
  * Created by dingo on 13.3.2017.
  * This UserLocalStorage is a singleton
@@ -20,9 +22,9 @@ public class UserLocalStorage {
     private final String TOKEN_KEY = "token_key";
     private final String SETTINGS_KEY = "settings_key";
 
-    public UserLocalStorage(Context context) {
+    private UserLocalStorage(Context context) {
         //TODO make local storage work from a nonactivity class. consider sql if it turns out to be difficult
-        mUserLocalDatabase = context.getSharedPreferences("com.t25.hbv601g.timeRunner.UserPrefferences",context.MODE_PRIVATE);
+        mUserLocalDatabase = context.getSharedPreferences("com.t25.hbv601g.timeRunner.UserPreferences",context.MODE_PRIVATE);
     }
 
     public static UserLocalStorage getInstance(Context context) {
