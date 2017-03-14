@@ -19,6 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClockActivity"></activity>
+        
+        <receiver android:name=".ReminderReceiver">
+            <intent-filter>
+                <action android:name="biz.timethief.timerunner.TEST_ACTION"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
