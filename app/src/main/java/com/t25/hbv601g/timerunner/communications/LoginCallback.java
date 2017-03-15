@@ -9,6 +9,6 @@ import org.json.JSONObject;
  */
 
 public interface LoginCallback {
-    void onSuccess();
+    void onSuccess(boolean isValid);
     void onFailure(String error);
 }

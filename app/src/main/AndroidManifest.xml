@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".ReminderReceiver">
+        <receiver android:name=".WifiChangeReceiver">
             <intent-filter>
                 <action android:name="android.net.wifi.STATE_CHANGE"></action>
             </intent-filter>

@@ -3,4 +3,7 @@
     <string name="preference_file_key"></string>
     <string name="user_name">Name</string>
     <string name="reset_password">Reset Password</string>
+    <string name="incorrect_username_password">Incorrect username or password.</string>
+    <string name="json_error">A JSON error has occurred.</string>
+    <string name="server_error">A server error has occurred.</string>
 </resources>

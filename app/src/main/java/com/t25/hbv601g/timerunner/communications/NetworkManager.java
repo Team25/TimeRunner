@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 
 import org.json.JSONException;
@@ -54,7 +55,7 @@ public class NetworkManager {
         return mQueue;
     }
 
-    public void isValidToken(String token, final TokenValidityCallback callback) {
+    public void isValidToken(String token, final LoginCallback callback) {
         String tokenPath = String.format("apptoken?token=%s", token);;
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
@@ -64,12 +65,11 @@ public class NetworkManager {
                         boolean isValid = false;
                         try {
                             isValid = response.getBoolean("valid");
+                            callback.onSuccess(isValid);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            callback.onFailure("network error occurred."); // string skrá
+                            callback.onFailure(mContext.getString(R.string.json_error));
                         }
-
-                        callback.onSuccess(isValid);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -88,9 +88,10 @@ public class NetworkManager {
                 (Request.Method.GET, mServerUrl + loginPath, new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response){
-                        mLocalStorage.saveToken(response);
-
-                        callback.onSuccess();
+                        if (!response.equals("")) {
+                            mLocalStorage.saveToken(response);
+                            callback.onSuccess(true);
+                        } else callback.onSuccess(false);
                     }
                 }, new Response.ErrorListener() {
                     @Override

@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 import com.t25.hbv601g.timerunner.ClockActivity;
 import com.t25.hbv601g.timerunner.LoginActivity;
+import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.communications.NetworkManager;
 import com.t25.hbv601g.timerunner.communications.LoginCallback;
-import com.t25.hbv601g.timerunner.communications.TokenValidityCallback;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 
 /**
@@ -42,26 +42,27 @@ public class LoginService {
             long elapsedTime = SystemClock.elapsedRealtime() - beginTime;
             intentDelayHandler(false, elapsedTime);
         } else {
-            mNetworkManager.isValidToken(token, new TokenValidityCallback() {
+            mNetworkManager.isValidToken(token, new LoginCallback() {
                 @Override
-                public void onSuccess(final boolean valid) {
+                public void onSuccess(final boolean isValid) {
                     final long elapsedTime = SystemClock.elapsedRealtime() - beginTime;
-                    intentDelayHandler(valid, elapsedTime);
+                    intentDelayHandler(isValid, elapsedTime);
                 }
 
                 @Override
                 public void onFailure(String error) {
                     // TODO user-friendly error message þegar þetta er alveg klárt.
+                    // TODO mögulega loka appinu eða, syna eitthvað stærra error en Toast, but where?.
                     Toast.makeText(mContext, error + ": App restart is required.", Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
 
-    private void intentDelayHandler(final boolean valid, final long elapsedTime) {
+    private void intentDelayHandler(final boolean isValid, final long elapsedTime) {
         /*
             Gerum nýjan thread svo hægt sé að bíða með intent án þess að frysta UI.
-            Leyfum fólki að dást að logo-inu í a.m.k. 5sek.
+            Leyfum fólki að dást að logo-inu í a.m.k. 5sek, burtséð frá networking latency.
          */
         Thread thread = new Thread() {
             public void run() {
@@ -74,7 +75,7 @@ public class LoginService {
                     }
                 }
 
-                if (valid) {
+                if (isValid) {
                     Intent intent = new Intent(mContext, ClockActivity.class);
                     mContext.startActivity(intent);
                 } else {
@@ -90,15 +91,23 @@ public class LoginService {
     public void login(String username, String password) {
         mNetworkManager.login(username, password, new LoginCallback() {
             @Override
-            public void onSuccess() {
-                Intent intent = new Intent(mContext, ClockActivity.class);
-                mContext.startActivity(intent);
+            public void onSuccess(boolean isValid) {
+                if (isValid) {
+                    Intent intent = new Intent(mContext, ClockActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    Toast.makeText(mContext,
+                            mContext.getString(R.string.incorrect_username_password),
+                            Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
             public void onFailure(String error) {
                 // TODO breyta í að sækja úr string skrá
-                Toast.makeText(mContext, "A server error has occurred", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,
+                        mContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
     }
