@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.t25.hbv601g.timerunner.ClockActivity;
@@ -30,14 +31,11 @@ public class LoginService {
         mContext = context;
     }
 
-    public void isLoggedIn() {
+    public void isLoggedIn(final ProgressBar progressWheel) {
         final long beginTime = SystemClock.elapsedRealtime();
         final String token = mLocalStorage.getToken();
 
-        // TODO taka þetta comment út
-        // Mér finnst réttara að láta bara services klasana sjá um að sækja/setja Tokens locally
-        // Minnkar networkManager smá og hann einbeitir sér bara að þessum leiðinda async
-        // requests i raun.
+        // TODO Ræða um það hver á að sjá um Tokens
         if (token == null) {
             long elapsedTime = SystemClock.elapsedRealtime() - beginTime;
             intentDelayHandler(false, elapsedTime);
@@ -51,24 +49,24 @@ public class LoginService {
 
                 @Override
                 public void onFailure(String error) {
-                    // TODO user-friendly error message þegar þetta er alveg klárt.
-                    // TODO mögulega loka appinu eða, syna eitthvað stærra error en Toast, but where?.
-                    Toast.makeText(mContext, error + ": App restart is required.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, mContext.getString(R.string.server_down),
+                            Toast.LENGTH_LONG).show();
+
+                    progressWheel.setVisibility(ProgressBar.INVISIBLE);
                 }
             });
         }
     }
 
     private void intentDelayHandler(final boolean isValid, final long elapsedTime) {
-        /*
-            Gerum nýjan thread svo hægt sé að bíða með intent án þess að frysta UI.
-            Leyfum fólki að dást að logo-inu í a.m.k. 5sek, burtséð frá networking latency.
-         */
+
+        // Gerum nýjan thread svo hægt sé að sleepa þráðinn án þess að frysta UI áður en það
+        // fær séns á að rendera.
         Thread thread = new Thread() {
             public void run() {
-
                 if (elapsedTime < 5000) {
                     try {
+                        // Leyfum fólki að dást að logo-inu í a.m.k. 5sek, burtséð frá networking latency.
                         Thread.sleep(5000 - elapsedTime);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -105,7 +103,6 @@ public class LoginService {
 
             @Override
             public void onFailure(String error) {
-                // TODO breyta í að sækja úr string skrá
                 Toast.makeText(mContext,
                         mContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }

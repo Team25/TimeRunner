@@ -1,15 +1,14 @@
 package com.t25.hbv601g.timerunner;
 
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import com.t25.hbv601g.timerunner.services.LoginService;
 
 public class LogoActivity extends AppCompatActivity {
 
+    private ProgressBar mProgressWheel;
     private LoginService mLoginService;
 
     @Override
@@ -20,7 +19,8 @@ public class LogoActivity extends AppCompatActivity {
 
         mLoginService = new LoginService(this);
 
-        mLoginService.isLoggedIn();
+        mProgressWheel = (ProgressBar) findViewById(R.id.progress_wheel);
 
+        mLoginService.isLoggedIn(mProgressWheel);
     }
 }

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/logo_gray_yellow"
-        android:layout_above="@+id/progressBar"
+        android:layout_above="@+id/progress_wheel"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="170dp" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:indeterminateDrawable="@drawable/loading_circle"
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_wheel"
         android:layout_marginBottom="160dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
