@@ -4,41 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#444"
     tools:context="com.t25.hbv601g.timerunner.LogoActivity">
 
-    <TextView
-        android:id="@+id/textView2"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Timerunner"
-        android:textSize="36dp"
-        android:textColor="@color/colorPrimary"
-        android:fontFamily="monospace"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="173dp"
-        android:layout_marginBottom="77dp"
+        app:srcCompat="@drawable/logo_gray_yellow"
         android:layout_above="@+id/progressBar"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="170dp" />
 
     <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/loading_circle"
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="318dp"
-        android:layout_above="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Grabbin' em by the pussy"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="404dp"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="160dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

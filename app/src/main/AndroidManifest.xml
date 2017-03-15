@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ResetPasswordActivity" />
         <receiver android:name=".ReminderReceiver">
             <intent-filter>
                 <action android:name="biz.timethief.timerunner.TEST_ACTION"></action>

@@ -40,13 +40,13 @@ public class LoginService {
         // requests i raun.
         if (token == null) {
             long elapsedTime = SystemClock.elapsedRealtime() - beginTime;
-            intentHandler(false, elapsedTime);
+            intentDelayHandler(false, elapsedTime);
         } else {
             mNetworkManager.isValidToken(token, new TokenValidityCallback() {
                 @Override
                 public void onSuccess(final boolean valid) {
                     final long elapsedTime = SystemClock.elapsedRealtime() - beginTime;
-                    intentHandler(valid, elapsedTime);
+                    intentDelayHandler(valid, elapsedTime);
                 }
 
                 @Override
@@ -58,7 +58,7 @@ public class LoginService {
         }
     }
 
-    private void intentHandler(final boolean valid, final long elapsedTime) {
+    private void intentDelayHandler(final boolean valid, final long elapsedTime) {
         /*
             Gerum nýjan thread svo hægt sé að bíða með intent án þess að frysta UI.
             Leyfum fólki að dást að logo-inu í a.m.k. 5sek.
@@ -102,4 +102,5 @@ public class LoginService {
             }
         });
     }
+
 }
