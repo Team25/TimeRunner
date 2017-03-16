@@ -11,15 +11,20 @@ import android.widget.Toast;
 public class WifiChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        // TODO event when disconnecting from work network
         NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         if (info != null && info.isConnected()) {
             WifiManager wifiManager = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            if (wifiInfo.getSSID().equals("Vinna")) {
-                Toast.makeText(context, "Connected to Vinna. ALERT AWAY", Toast.LENGTH_LONG).show();
+            // TODO get desired SSID from settings or server
+            if (wifiInfo.getSSID().equals("\"Pretty fly for a wifi\"")) {
+                // check for token
+                // if token, check whether clocked in
+                // if not clocked in, notify and take to clockactivity
+                context.sendBroadcast(new Intent("com.t25.hbv601g.timerunner.NOTIFY_CLOCK_IN"));
             }
             else {
-                Toast.makeText(context, "Connected to something else. Boring.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Tengdur " + wifiInfo.getSSID() + " - Geri ekkert", Toast.LENGTH_LONG).show();
             }
         }
 
