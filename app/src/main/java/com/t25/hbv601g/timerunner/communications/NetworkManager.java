@@ -62,10 +62,8 @@ public class NetworkManager {
                 (Request.Method.GET, mServerUrl + tokenPath, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response){
-                        boolean isValid = false;
                         try {
-                            isValid = response.getBoolean("valid");
-                            callback.onSuccess(isValid);
+                            callback.onSuccess(response.getBoolean("valid"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             callback.onFailure(mContext.getString(R.string.json_error));

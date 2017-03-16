@@ -1,5 +1,6 @@
 package com.t25.hbv601g.timerunner.services;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
@@ -59,15 +60,18 @@ public class LoginService {
     }
 
     private void intentDelayHandler(final boolean isValid, final long elapsedTime) {
+        // Minimum delay tími verður í raun fremri talan.
+        final long delay = 5000 - elapsedTime;
 
-        // Gerum nýjan thread svo hægt sé að sleepa þráðinn án þess að frysta UI áður en það
+        // Nýr þráður svo hægt sé að sleepa án þess að frysta UI áður en það
         // fær séns á að rendera.
         Thread thread = new Thread() {
             public void run() {
-                if (elapsedTime < 5000) {
+                // Bíðum bara ef networking tók minni tíma en 5 sek, svo logo fái alltaf
+                // minnst 5sek skjátíma.
+                if (delay  > 0) {
                     try {
-                        // Leyfum fólki að dást að logo-inu í a.m.k. 5sek, burtséð frá networking latency.
-                        Thread.sleep(5000 - elapsedTime);
+                        Thread.sleep(delay);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -80,6 +84,7 @@ public class LoginService {
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     mContext.startActivity(intent);
                 }
+
 
             }
         };
