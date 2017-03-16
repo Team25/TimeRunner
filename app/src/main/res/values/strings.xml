@@ -7,4 +7,8 @@
     <string name="json_error">A JSON error has occurred.</string>
     <string name="server_error">A server error has occurred.</string>
     <string name="server_down">The Timerunner service is currently unavailable.</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">Login</string>
+    <string name="user_name_hint">User name</string>
+    <string name="password_hint">Password</string>
 </resources>
