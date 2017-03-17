@@ -2,6 +2,8 @@ package com.t25.hbv601g.timerunner.communications;
 
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.AsyncTask;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,7 +12,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.t25.hbv601g.timerunner.R;
+import com.t25.hbv601g.timerunner.entities.Entry;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 
 import org.json.JSONException;
@@ -100,6 +104,33 @@ public class NetworkManager {
                 );
         mQueue.add(stringRequest);
 
+    }
+
+    public void getOpenClockEntry(String token, final ClockCallback callback) {
+        String clockPath = Uri.parse(mServerUrl)
+                .buildUpon()
+                .appendPath("appclockstatus") //careful that controller listens to this address
+                .appendQueryParameter("token", token)
+                .build().toString();
+
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.GET, clockPath, new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response){
+                        if (!response.equals("")) {
+                            Gson gson = new Gson();
+                            Entry entry = gson.fromJson(response, Entry.class);
+                            callback.onSuccess(entry);
+                        } else callback.onSuccess(null);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        callback.onFailure(error.toString());
+                    }
+                }
+                );
+        mQueue.add(stringRequest);
     }
 
 }
