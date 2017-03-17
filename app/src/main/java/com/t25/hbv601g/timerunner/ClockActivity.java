@@ -46,7 +46,7 @@ public class ClockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (localStorage.removeToken()) {
-                    mCurrentEmployeeDisplay.setText("Dude, where's your token?");
+                    mCurrentEmployeeDisplay.setText("Dude, where's your token?"); //where is your token dude
                     Toast.makeText(ClockActivity.this, "token removed", Toast.LENGTH_LONG).show();
                 }
             }
