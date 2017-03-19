@@ -59,11 +59,14 @@ public class ClockActivity extends AppCompatActivity {
 
         mBtnClock = (Button) findViewById(R.id.btn_clock);
         //TODO check if user is clocked in or out and put right text on button
+        mClockService.isClockedIn(mBtnClock);
 
         mBtnClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO clock in/out and have brogress circle while we wait for confirmation from server
+                // remove this shit, just for debugging.
+                mClockService.isClockedIn(mBtnClock);
             }
 
         });

@@ -4,6 +4,7 @@ package com.t25.hbv601g.timerunner.communications;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -114,7 +115,7 @@ public class NetworkManager {
     public void getOpenClockEntry(String token, final ClockCallback callback) {
         String clockPath = Uri.parse(mServerUrl)
                 .buildUpon()
-                .appendPath("appclockstatus") //careful that controller listens to this address
+                .appendPath("appentry") //careful that controller listens to this address
                 .appendQueryParameter("token", token)
                 .build().toString();
 
@@ -122,11 +123,12 @@ public class NetworkManager {
                 (Request.Method.GET, clockPath, new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response){
-                        if (!response.equals("")) {
-                            Gson gson = new Gson();
-                            Entry entry = gson.fromJson(response, Entry.class);
+                        Gson gson = new Gson();
+                        Entry entry = gson.fromJson(response, Entry.class);
+                        if (entry != null)
                             callback.onSuccess(entry);
-                        } else callback.onSuccess(null);
+                        else
+                            callback.onSuccess(null);
                     }
                 }, new Response.ErrorListener() {
                     @Override
