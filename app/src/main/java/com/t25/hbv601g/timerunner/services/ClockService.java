@@ -62,11 +62,11 @@ public class ClockService {
                 if(entry.getOutTime() == null){
                     Log.e("place2","HI THERE");
                     Toast.makeText(mContext,
-                            mContext.getString(R.string.clock_in_toast), Toast.LENGTH_LONG).show();
+                            mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
                 } else {
                     Log.e("place3","HI THERE");
                     Toast.makeText(mContext,
-                            mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
+                            mContext.getString(R.string.clock_in_toast), Toast.LENGTH_LONG).show();
                 }
                 Log.e("place4","HI THERE");
                 mCurrentEntry = entry;
