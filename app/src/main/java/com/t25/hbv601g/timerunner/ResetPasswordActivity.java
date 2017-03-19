@@ -29,7 +29,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         mResetButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //TODO
+
                 String username = mUserName.getText().toString().trim();
 
                 mLoginService.resetPassword(username);
@@ -41,7 +41,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            // do something on back.
+
             Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
             ResetPasswordActivity.this.startActivity(intent);
 
