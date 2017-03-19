@@ -98,7 +98,7 @@ public class ClockActivity extends AppCompatActivity {
         mClockNotification.setWhen(System.currentTimeMillis());
         mClockNotification.setContentTitle("Clock in to TimerRunner?");
         mClockNotification.setContentText("Tap to clock-in.");
-        mClockNotification.setVibrate(new long[] {500});
+        mClockNotification.setVibrate(new long[] {2000, 500});
         mClockNotification.setLights(Color.RED, 500, 500);
 
         Intent clockInIntent = new Intent(this, ClockActivity.class);
