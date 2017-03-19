@@ -114,4 +114,29 @@ public class LoginService {
         });
     }
 
+
+    public void resetPassword(String username) {
+        mNetworkManager.resetPassword(username, new LoginCallback() {
+            @Override
+            public void onSuccess(boolean isValid) {
+                if (isValid) {
+                    Intent intent = new Intent (mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    Toast.makeText(mContext,
+                            "Username not on file.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(mContext,
+                        mContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
 }

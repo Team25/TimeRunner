@@ -60,7 +60,7 @@ public class NetworkManager {
     }
 
     public void isValidToken(String token, final LoginCallback callback) {
-        String tokenPath = String.format("apptoken?token=%s", token);;
+        String tokenPath = String.format("apptoken?token=%s", token);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
                 (Request.Method.GET, mServerUrl + tokenPath, null, new Response.Listener<JSONObject>() {
@@ -104,6 +104,11 @@ public class NetworkManager {
                 );
         mQueue.add(stringRequest);
 
+    }
+
+    public void resetPassword(String username, final LoginCallback callback) {
+        //TODO
+        callback.onFailure("error");
     }
 
     public void getOpenClockEntry(String token, final ClockCallback callback) {
