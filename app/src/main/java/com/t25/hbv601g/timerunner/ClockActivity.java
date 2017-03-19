@@ -66,11 +66,7 @@ public class ClockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO clock in/out and have brogress circle while we wait for confirmation from server
-                mClockService.clock();
-                if(mClockService.getCurrentEntry()==null || mClockService.getCurrentEntry().getOutTime()==null)
-                    mBtnClock.setText(getString(R.string.clock_in_btn_text));
-                else
-                    mBtnClock.setText(getString(R.string.clock_out_btn_text));
+                mClockService.clock(mBtnClock);
             }
 
         });

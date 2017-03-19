@@ -51,24 +51,22 @@ public class ClockService {
         });
     }
 
-    public void clock(){
+    public void clock(final Button button){
         String token = mLocalStorage.getToken();
         mNetworkManager.clockInOut(token, mCurrentEntry, new ClockCallback(){
 
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onSuccess(Entry entry) {
-                Log.e("place1","HI THERE");
                 if(entry.getOutTime() == null){
-                    Log.e("place2","HI THERE");
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
+                    button.setText(mContext.getString(R.string.clock_out_btn_text));
                 } else {
-                    Log.e("place3","HI THERE");
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_in_toast), Toast.LENGTH_LONG).show();
+                    button.setText(mContext.getString(R.string.clock_in_btn_text));
                 }
-                Log.e("place4","HI THERE");
                 mCurrentEntry = entry;
 
             }

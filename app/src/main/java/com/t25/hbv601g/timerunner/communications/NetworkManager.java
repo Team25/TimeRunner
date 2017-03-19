@@ -125,7 +125,7 @@ public class NetworkManager {
                     public void onResponse(String response){
                         Gson gson = new Gson();
                         Entry entry = gson.fromJson(response, Entry.class);
-                        if (entry != null)  
+                        if (entry != null)
                             callback.onSuccess(entry);
                         else
                             callback.onSuccess(null);
