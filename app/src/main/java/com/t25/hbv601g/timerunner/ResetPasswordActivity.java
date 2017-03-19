@@ -1,7 +1,9 @@
 package com.t25.hbv601g.timerunner;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +29,25 @@ public class ResetPasswordActivity extends AppCompatActivity {
         mResetButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //TODO
+
                 String username = mUserName.getText().toString().trim();
 
                 mLoginService.resetPassword(username);
             }
         });
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+
+            Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+            ResetPasswordActivity.this.startActivity(intent);
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }
