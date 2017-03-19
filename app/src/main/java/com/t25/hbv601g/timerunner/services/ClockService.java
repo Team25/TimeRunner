@@ -30,7 +30,7 @@ public class ClockService {
     }
 
     //TODO change name to more appropriet name.
-    public void isClockedIn(final Button button){
+    public void setClockedButtonText(final Button button){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
             @Override

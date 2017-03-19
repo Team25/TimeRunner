@@ -60,7 +60,7 @@ public class ClockActivity extends AppCompatActivity {
 
         mBtnClock = (Button) findViewById(R.id.btn_clock);
         //TODO check if user is clocked in or out and put right text on button
-        mClockService.isClockedIn(mBtnClock);
+        mClockService.setClockedButtonText(mBtnClock);
 
         mBtnClock.setOnClickListener(new View.OnClickListener() {
             @Override
