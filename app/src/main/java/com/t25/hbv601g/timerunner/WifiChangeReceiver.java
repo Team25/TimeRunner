@@ -17,7 +17,7 @@ public class WifiChangeReceiver extends BroadcastReceiver {
             WifiManager wifiManager = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             // TODO get desired SSID from settings or server
-            if (wifiInfo.getSSID().equals("\"Pretty fly for a wifi\"")) {
+            if (wifiInfo.getSSID().equals("\"simafelagid\"")) {
                 // check for token
                 // if token, check whether clocked in
                 // if not clocked in, notify and take to clockactivity

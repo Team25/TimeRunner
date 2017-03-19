@@ -29,7 +29,7 @@ import org.json.JSONObject;
 // þó svo activity deyi, t.d. við device rotation.
 public class NetworkManager {
 
-    private final String mServerUrl= "http://10.0.2.2:8080/";
+    private final String mServerUrl= "http://timethief.biz:8080/";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
