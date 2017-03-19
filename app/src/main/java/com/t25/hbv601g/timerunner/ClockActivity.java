@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,8 +66,11 @@ public class ClockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO clock in/out and have brogress circle while we wait for confirmation from server
-                // remove this shit, just for debugging.
-                mClockService.isClockedIn(mBtnClock);
+                mClockService.clock();
+                if(mClockService.getCurrentEntry()==null || mClockService.getCurrentEntry().getOutTime()==null)
+                    mBtnClock.setText(getString(R.string.clock_in_btn_text));
+                else
+                    mBtnClock.setText(getString(R.string.clock_out_btn_text));
             }
 
         });

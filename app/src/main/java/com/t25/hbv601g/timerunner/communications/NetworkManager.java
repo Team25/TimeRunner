@@ -140,4 +140,44 @@ public class NetworkManager {
         mQueue.add(stringRequest);
     }
 
+    // CHANGE TO POST INSTEAD OF GET
+    public void clockInOut(String token, Entry entry, final ClockCallback callback) {
+        String clockPath;
+        // TODO make this less redundant.
+        if(entry == null) {
+            clockPath = Uri.parse(mServerUrl)
+                    .buildUpon()
+                    .appendPath("appclock") //careful that controller listens to this address
+                    .appendQueryParameter("token", token)
+                    .build().toString();
+        } else {
+            clockPath = Uri.parse(mServerUrl)
+                    .buildUpon()
+                    .appendPath("appclock") //careful that controller listens to this address
+                    .appendQueryParameter("token", token)
+                    .appendQueryParameter("department", entry.getDepartment())
+                    .build().toString();
+        }
+
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.GET, clockPath, new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response){
+                        Gson gson = new Gson();
+                        Entry entry = gson.fromJson(response, Entry.class);
+                        if (entry != null)
+                            callback.onSuccess(entry);
+                        else
+                            callback.onSuccess(null);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        callback.onFailure(error.toString());
+                    }
+                }
+                );
+        mQueue.add(stringRequest);
+    }
+
 }

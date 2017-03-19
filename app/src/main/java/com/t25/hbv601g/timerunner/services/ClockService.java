@@ -1,6 +1,8 @@
 package com.t25.hbv601g.timerunner.services;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -19,7 +21,7 @@ public class ClockService {
     private NetworkManager mNetworkManager;
     private final Context mContext;
     private UserLocalStorage mLocalStorage;
-    private Entry currentEntry; //ekki í uml
+    private Entry mCurrentEntry; //ekki í uml
 
     public ClockService(Context context) {
         mNetworkManager = NetworkManager.getInstance(context);
@@ -27,11 +29,13 @@ public class ClockService {
         mContext = context;
     }
 
+    //TODO change name to more appropriet name.
     public void isClockedIn(final Button button){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
             @Override
             public void onSuccess(Entry entry) {
+                mCurrentEntry = entry;
                 if(entry==null){
                     button.setText("Clock in");
                 } else {
@@ -47,30 +51,38 @@ public class ClockService {
         });
     }
 
-    public boolean clock(){
-
-        return false;
-    }
-
-    //ég er ekki að digga callbacks XD :'(
-
-    public void getCurrentEntry(){
+    public void clock(){
         String token = mLocalStorage.getToken();
-        mNetworkManager.getOpenClockEntry(token, new ClockCallback(){
+        mNetworkManager.clockInOut(token, mCurrentEntry, new ClockCallback(){
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onSuccess(Entry entry) {
-                //TODO implement this
-                currentEntry = entry;
+                Log.e("place1","HI THERE");
+                if(entry.getOutTime() == null){
+                    Log.e("place2","HI THERE");
+                    Toast.makeText(mContext,
+                            mContext.getString(R.string.clock_in_toast), Toast.LENGTH_LONG).show();
+                } else {
+                    Log.e("place3","HI THERE");
+                    Toast.makeText(mContext,
+                            mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
+                }
+                Log.e("place4","HI THERE");
+                mCurrentEntry = entry;
 
             }
 
             @Override
             public void onFailure(String error) {
-                //TODO Implement this
-
+                Toast.makeText(mContext,
+                        mContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public Entry getCurrentEntry(){
+        return mCurrentEntry;
     }
 
 }
