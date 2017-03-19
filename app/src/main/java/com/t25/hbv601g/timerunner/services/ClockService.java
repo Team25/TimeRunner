@@ -29,7 +29,7 @@ public class ClockService {
         mContext = context;
     }
 
-    //TODO change name to more appropriet name.
+
     public void setClockedButtonText(final Button button){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
