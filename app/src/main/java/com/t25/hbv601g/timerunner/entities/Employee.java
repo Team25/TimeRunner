@@ -12,12 +12,15 @@ public class Employee {
     private String mFullName;
     private String mPhoneNumber;
     private boolean mClockedIn;
+    private String mToken;
 
-    public Employee(long id, String fullName, String phoneNumber, boolean clockedIn) {
+    public Employee(long id, String fullName, String phoneNumber, boolean clockedIn, String token) {
         mId = id;
         mFullName = fullName;
         mPhoneNumber = phoneNumber;
         mClockedIn = clockedIn;
+        mToken = token;
+
     }
 
     public long getId() {
@@ -51,4 +54,8 @@ public class Employee {
     public void setClockedIn(boolean clockedIn) {
         mClockedIn = clockedIn;
     }
+
+    public String getToken() { return mToken; }
+
+    public void setToken(String token) { mToken = token; }
 }

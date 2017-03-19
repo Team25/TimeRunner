@@ -39,7 +39,6 @@ public class UserLocalStorage {
      * @param token
      */
     public void saveToken(String token){
-        //TODO make sure this doesnt get lost when app is closed.
         mUserLocalDatabase.edit()
                 .putString(TOKEN_KEY, token)
                 .apply();

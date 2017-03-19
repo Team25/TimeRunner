@@ -29,10 +29,12 @@ public class ClockService {
     }
 
     public boolean clock(){
+
         return false;
     }
 
     //ég er ekki að digga callbacks XD :'(
+
     public void getCurrentEntry(){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback(){

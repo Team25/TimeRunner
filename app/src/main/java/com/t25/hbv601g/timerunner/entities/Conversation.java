@@ -15,6 +15,8 @@ public class Conversation {
      * list of employees that are participating in the conversation
      */
     private List<Employee> mMembers;
+
+    private List<Message> mMessages;
     /**
      * number of messages that have fetched from server
      */

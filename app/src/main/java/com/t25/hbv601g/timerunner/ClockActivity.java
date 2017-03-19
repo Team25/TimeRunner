@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.t25.hbv601g.timerunner.communications.NetworkManager;
 import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
+import com.t25.hbv601g.timerunner.services.ClockService;
 
 import org.w3c.dom.Text;
 
@@ -25,12 +26,16 @@ public class ClockActivity extends AppCompatActivity {
 
     private TextView mCurrentEmployeeDisplay;
     private Button mBtnDeleteToken;
+    private Button mBtnClock;
     private NotificationCompat.Builder mClockNotification;
     private static final int mUniqueNotificationId = 13371337; // We don't mind overwriting older notifications
+    private ClockService mClockService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mClockService = new ClockService(this);
         setContentView(R.layout.activity_clock);
 
         final UserLocalStorage localStorage = UserLocalStorage.getInstance(this);
@@ -50,6 +55,17 @@ public class ClockActivity extends AppCompatActivity {
                     Toast.makeText(ClockActivity.this, "token removed", Toast.LENGTH_LONG).show();
                 }
             }
+        });
+
+        mBtnClock = (Button) findViewById(R.id.btn_clock);
+        //TODO check if user is clocked in or out and put right text on button
+
+        mBtnClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO clock in/out and have brogress circle while we wait for confirmation from server
+            }
+
         });
 
         mClockNotification = new NotificationCompat.Builder(this);
@@ -91,4 +107,5 @@ public class ClockActivity extends AppCompatActivity {
         NotificationManager nm =  (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.notify(mUniqueNotificationId, mClockNotification.build());
     }
+
 }
