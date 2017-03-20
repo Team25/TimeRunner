@@ -18,7 +18,7 @@ public class WifiChangeReceiver extends BroadcastReceiver {
             String joined_network = wifiInfo.getSSID();
             // TODO get desired SSID from settings or server
             // TODO add time dimension and last_wifi_network so that we don't bombard user with notifications if the wifi is unreliable
-            if (joined_network.equals("\"simafelagid\"")) {
+            if (joined_network.equals("\"eduroam\"")) {
                 context.sendBroadcast(new Intent("com.t25.hbv601g.timerunner.NOTIFY_CLOCK_IN"));
             }
         }
