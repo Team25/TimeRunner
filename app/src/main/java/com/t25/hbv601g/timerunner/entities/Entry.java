@@ -8,67 +8,67 @@ import java.util.List;
 
 public class Entry {
 
-    private long id;
-    private List<Comment> comments;
-    private String department;
-    private String inTime;
-    private String outTime;
-    private boolean verified;
+    private long mId;
+    private List<Comment> mComments;
+    private String mDepartment;
+    private String mInTime;
+    private String mOutTime;
+    private boolean mVerified;
 
     public Entry(long id, List<Comment> comments, String department, String inTime, String outTime, boolean verified) {
-        this.id = id;
-        this.comments = comments;
-        this.department = department;
-        this.inTime = inTime;
-        this.outTime = outTime;
-        this.verified = verified;
+        this.mId = id;
+        this.mComments = comments;
+        this.mDepartment = department;
+        this.mInTime = inTime;
+        this.mOutTime = outTime;
+        this.mVerified = verified;
     }
 
     public long getId() {
-        return id;
+        return mId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public List<Comment> getComments() {
-        return comments;
+        return mComments;
     }
 
     public void setComments(List<Comment> comments) {
-        this.comments = comments;
+        this.mComments = comments;
     }
 
     public String getDepartment() {
-        return department;
+        return mDepartment;
     }
 
     public void setDepartment(String department) {
-        this.department = department;
+        this.mDepartment = department;
     }
 
     public String getInTime() {
-        return inTime;
+        return mInTime;
     }
 
     public void setInTime(String inTime) {
-        this.inTime = inTime;
+        this.mInTime = inTime;
     }
 
     public String getOutTime() {
-        return outTime;
+        return mOutTime;
     }
 
     public void setOutTime(String outTime) {
-        this.outTime = outTime;
+        this.mOutTime = outTime;
     }
 
     public boolean isVerified() {
-        return verified;
+        return mVerified;
     }
 
     public void setVerified(boolean verified) {
-        this.verified = verified;
+        this.mVerified = verified;
     }
 }
