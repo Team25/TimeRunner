@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.widget.Toast;
 
 public class WifiChangeReceiver extends BroadcastReceiver {
     @Override
@@ -16,15 +15,11 @@ public class WifiChangeReceiver extends BroadcastReceiver {
         if (info != null && info.isConnected()) {
             WifiManager wifiManager = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            String joined_network = wifiInfo.getSSID();
             // TODO get desired SSID from settings or server
-            if (wifiInfo.getSSID().equals("\"simafelagid\"")) {
-                // check for token
-                // if token, check whether clocked in
-                // if not clocked in, notify and take to clockactivity
+            // TODO add time dimension and last_wifi_network so that we don't bombard user with notifications if the wifi is unreliable
+            if (joined_network.equals("\"simafelagid\"")) {
                 context.sendBroadcast(new Intent("com.t25.hbv601g.timerunner.NOTIFY_CLOCK_IN"));
-            }
-            else {
-                Toast.makeText(context, "Tengdur " + wifiInfo.getSSID() + " - Geri ekkert", Toast.LENGTH_LONG).show();
             }
         }
 
