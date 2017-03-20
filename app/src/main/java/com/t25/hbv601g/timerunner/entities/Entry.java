@@ -14,15 +14,15 @@ public class Entry {
     private String mDepartment;
     private Timestamp mInTime;
     private Timestamp mOutTime;
-    private boolean mIsVerifies;
+    private boolean mIsVerified;
 
-    public Entry(long id, List<Comment> comments, String department, Timestamp inTime, Timestamp outTime, boolean isVerifies) {
+    public Entry(long id, List<Comment> comments, String department, Timestamp inTime, Timestamp outTime, boolean isVerified) {
         mId = id;
         mComments = comments;
         mDepartment = department;
         mInTime = inTime;
         mOutTime = outTime;
-        mIsVerifies = isVerifies;
+        mIsVerified = isVerified;
     }
 
     public long getId() {
@@ -65,11 +65,11 @@ public class Entry {
         mOutTime = outTime;
     }
 
-    public boolean isVerifies() {
-        return mIsVerifies;
+    public boolean isVerified() {
+        return mIsVerified;
     }
 
-    public void setVerifies(boolean verifies) {
-        mIsVerifies = verifies;
+    public void setVerified(boolean verified) {
+        mIsVerified = verified;
     }
 }
