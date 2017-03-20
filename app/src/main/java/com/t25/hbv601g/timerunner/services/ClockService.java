@@ -10,7 +10,6 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.t25.hbv601g.timerunner.ClockActivity;
 import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.communications.ClockCallback;
