@@ -75,7 +75,6 @@ public class ClockService {
         });
     }
 
-
     public void setClockedButtonText(final Button button){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
@@ -128,5 +127,4 @@ public class ClockService {
     public Entry getCurrentEntry(){
         return mCurrentEntry;
     }
-
 }
