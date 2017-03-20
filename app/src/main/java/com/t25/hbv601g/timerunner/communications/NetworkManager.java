@@ -24,6 +24,10 @@ import org.json.JSONObject;
 
 // Singleton klasi sem lifir á meðan appið lifir, þ.e
 // þó svo activity deyi, t.d. við device rotation.
+
+// Flest föll hér sjá bara um networking og eru bara passthrough fyrir gögn.
+// Gögn koma sem parametrar frá services og gögnum frá server er skilað til
+// services Með callbacks.
 public class NetworkManager {
 
     private final String mServerUrl= "http://timethief.biz:8080/";
@@ -36,9 +40,8 @@ public class NetworkManager {
 
     private NetworkManager(Context context) {
         // tekur inn activity context til þess að hægt sé að instantiate-a
-        // RequestQueue með application context, sem heldur queue-inu á lífi
-        // á meðan appið lifir.
-        mContext = context; // getapplicationcontext ?
+        // RequestQueue með application context.
+        mContext = context;
         mQueue = getRequestQueue();
         mLocalStorage = UserLocalStorage.getInstance(context);
     }
@@ -50,6 +53,8 @@ public class NetworkManager {
         return mInstance;
     }
 
+    // RequestQueue er biðröð sem öll http request eru sett í. RequestQueue-ið sér
+    // um að þau séu send út í réttri röð. Kemur úr Volley pakkanum.
     public RequestQueue getRequestQueue() {
         if (mQueue == null) {
             mQueue = Volley.newRequestQueue(mContext.getApplicationContext());
@@ -57,6 +62,7 @@ public class NetworkManager {
         return mQueue;
     }
 
+    // Single sign on. Notum token til að logga inn ef tokenið er til/gilt.
     public void tokenLogin(String token, final LoginCallback callback) {
         String tokenPath = String.format("apptoken?token=%s", token);
 
@@ -76,6 +82,7 @@ public class NetworkManager {
                 );
         mQueue.add(jsonRequest);
     }
+
 
     public void login(String username, String password, final LoginCallback callback) {
         String loginPath = String.format("applogin?userName=%s&password=%s", username, password);
@@ -98,10 +105,11 @@ public class NetworkManager {
     }
 
     public void resetPassword(String username, final LoginCallback callback) {
-        //TODO
-        callback.onFailure("error");
+        //TODO Unimplemented. Ignore for now.
+        // callback.onFailure("error");
     }
 
+    // Athugum hvort að user sé clocked in.
     public void getOpenClockEntry(String token, final ClockCallback callback) {
         String clockPath = Uri.parse(mServerUrl)
                 .buildUpon()

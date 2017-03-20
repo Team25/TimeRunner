@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -106,8 +105,6 @@ public class ClockService {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onSuccess(Entry entry) {
-                Gson zz = new Gson();
-                Log.e("FLE", zz.toJson(entry));
                 if(entry.getOutTime() != null){
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
