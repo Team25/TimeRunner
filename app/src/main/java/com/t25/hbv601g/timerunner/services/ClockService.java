@@ -46,10 +46,10 @@ public class ClockService {
                     // Todo something if user is not clocked in
                     // Build the notification
                     clockNotification.setSmallIcon(R.drawable.running_man);
-                    clockNotification.setTicker("Want to clock in?");
+                    clockNotification.setTicker(mContext.getString(R.string.clock_in_reminder_ticker));
                     clockNotification.setWhen(System.currentTimeMillis());
-                    clockNotification.setContentTitle("Clock in to TimerRunner?");
-                    clockNotification.setContentText("Tap to clock-in.");
+                    clockNotification.setContentTitle(mContext.getString(R.string.clock_in_reminder_title));
+                    clockNotification.setContentText(mContext.getString(R.string.clock_in_reminder_text));
                     clockNotification.setVibrate(new long[] {2000, 500});
                     clockNotification.setLights(Color.RED, 500, 500);
 
@@ -83,9 +83,9 @@ public class ClockService {
             public void onSuccess(Entry entry) {
                 mCurrentEntry = entry;
                 if(entry==null){
-                    button.setText("Clock in");
+                    button.setText(mContext.getString(R.string.clock_in_btn_text));
                 } else {
-                    button.setText("Clock out");
+                    button.setText(mContext.getString(R.string.clock_out_btn_text));
                 }
             }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Time Runner</string>
+    <string name="app_name">TimeRunner</string>
     <string name="preference_file_key"></string>
     <string name="user_name">Name</string>
     <string name="reset_password">Reset Password</string>
@@ -15,4 +15,7 @@
     <string name="clock_out_toast">You have clocked out</string>
     <string name="clock_in_btn_text">Clock in</string>
     <string name="clock_out_btn_text">Clock out</string>
+    <string name="clock_in_reminder_ticker">Want to clock in?</string>
+    <string name="clock_in_reminder_title">Clock in to TimeRunner?</string>
+    <string name="clock_in_reminder_text">Tap to clock in</string>
 </resources>
