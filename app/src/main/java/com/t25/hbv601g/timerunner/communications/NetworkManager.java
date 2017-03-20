@@ -3,7 +3,6 @@ package com.t25.hbv601g.timerunner.communications;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -14,11 +13,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.entities.Entry;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -29,8 +26,7 @@ import org.json.JSONObject;
 // þó svo activity deyi, t.d. við device rotation.
 public class NetworkManager {
 
-    //private final String mServerUrl= "http://timethief.biz:8080/";
-    private final String mServerUrl= "http://10.0.2.2:8080/";
+    private final String mServerUrl= "http://timethief.biz:8080/";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
