@@ -36,7 +36,7 @@ public class LoginService {
         mContext = context;
     }
 
-    public void isLoggedIn(final ProgressBar progressWheel) {
+    public void tokenLogin(final ProgressBar progressWheel) {
         final long beginTime = SystemClock.elapsedRealtime();
         final String token = mLocalStorage.getToken();
 
@@ -55,7 +55,6 @@ public class LoginService {
                             employeeMobile = new Employee(employee.getInt("id"),
                                     employee.getString("fullName"),
                                     employee.getString("phoneNumber"),
-                                    false, // Todo þarf employee að hafa clockStatus ? Það fokkar öllu upp
                                     employee.getString("token"));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -119,7 +118,6 @@ public class LoginService {
                         employeeMobile = new Employee(employee.getInt("id"),
                                 employee.getString("fullName"),
                                 employee.getString("phoneNumber"),
-                                false, // Todo þarf employee að hafa clockStatus ? Það fokkar öllu upp
                                 employee.getString("token"));
 
                         mLocalStorage.saveToken(employeeMobile.getToken());
@@ -135,7 +133,6 @@ public class LoginService {
                             mContext.getString(R.string.incorrect_username_password),
                             Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
@@ -148,9 +145,10 @@ public class LoginService {
 
 
     public void resetPassword(String username) {
+        // TODO Ignore this for now. Implemented later with mail system.
         mNetworkManager.resetPassword(username, new LoginCallback() {
             @Override
-            public void onSuccess(JSONObject obj) { // TODO Laga, bara fix til að láta login virka.
+            public void onSuccess(JSONObject obj) {
                 if (obj != null) {
                     Intent intent = new Intent (mContext, LoginActivity.class);
                     mContext.startActivity(intent);
@@ -165,7 +163,6 @@ public class LoginService {
             public void onFailure(String error) {
                 Toast.makeText(mContext,
                         mContext.getString(R.string.server_error), Toast.LENGTH_LONG).show();
-
             }
         });
 

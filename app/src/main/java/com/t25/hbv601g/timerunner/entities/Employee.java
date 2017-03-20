@@ -11,14 +11,12 @@ public class Employee implements Serializable {
     private long mId;
     private String mFullName;
     private String mPhoneNumber;
-    private boolean mClockedIn;
     private String mToken;
 
-    public Employee(long id, String fullName, String phoneNumber, boolean clockedIn, String token) {
+    public Employee(long id, String fullName, String phoneNumber, String token) {
         mId = id;
         mFullName = fullName;
         mPhoneNumber = phoneNumber;
-        mClockedIn = clockedIn;
         mToken = token;
 
     }
@@ -45,14 +43,6 @@ public class Employee implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         mPhoneNumber = phoneNumber;
-    }
-
-    public boolean isClockedIn() {
-        return mClockedIn;
-    }
-
-    public void setClockedIn(boolean clockedIn) {
-        mClockedIn = clockedIn;
     }
 
     public String getToken() { return mToken; }

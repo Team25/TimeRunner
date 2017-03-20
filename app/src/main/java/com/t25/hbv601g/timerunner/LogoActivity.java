@@ -21,6 +21,6 @@ public class LogoActivity extends AppCompatActivity {
 
         mProgressWheel = (ProgressBar) findViewById(R.id.progress_wheel);
 
-        mLoginService.isLoggedIn(mProgressWheel);
+        mLoginService.tokenLogin(mProgressWheel);
     }
 }
