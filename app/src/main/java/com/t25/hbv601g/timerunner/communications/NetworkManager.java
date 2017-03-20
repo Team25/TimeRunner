@@ -30,7 +30,7 @@ import org.json.JSONObject;
 public class NetworkManager {
 
     //private final String mServerUrl= "http://timethief.biz:8080/";
-    private final String mServerUrl= "http://192.168.120.132:8080/";
+    private final String mServerUrl= "http://10.0.2.2:8080/";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
@@ -61,23 +61,19 @@ public class NetworkManager {
         return mQueue;
     }
 
-    public void isValidToken(String token, final LoginCallback callback) {
+    public void tokenLogin(String token, final LoginCallback callback) {
         String tokenPath = String.format("apptoken?token=%s", token);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
                 (Request.Method.GET, mServerUrl + tokenPath, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response){
-                        try {
-                            callback.onSuccess(response.getBoolean("valid"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            callback.onFailure(mContext.getString(R.string.json_error));
-                        }
+                        callback.onSuccess(response);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error){
+                        error.printStackTrace();
                         callback.onFailure(error.toString());
                     }
                 }
@@ -88,14 +84,11 @@ public class NetworkManager {
     public void login(String username, String password, final LoginCallback callback) {
         String loginPath = String.format("applogin?userName=%s&password=%s", username, password);
 
-        StringRequest stringRequest = new StringRequest
-                (Request.Method.GET, mServerUrl + loginPath, new Response.Listener<String>(){
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (Request.Method.GET, mServerUrl + loginPath, null,new Response.Listener<JSONObject>(){
                     @Override
-                    public void onResponse(String response){
-                        if (!response.equals("")) {
-                            mLocalStorage.saveToken(response);
-                            callback.onSuccess(true);
-                        } else callback.onSuccess(false);
+                    public void onResponse(JSONObject response){
+                        callback.onSuccess(response);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -104,7 +97,7 @@ public class NetworkManager {
                     }
                 }
                 );
-        mQueue.add(stringRequest);
+        mQueue.add(jsonRequest);
 
     }
 
