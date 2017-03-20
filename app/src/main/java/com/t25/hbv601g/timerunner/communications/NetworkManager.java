@@ -29,7 +29,8 @@ import org.json.JSONObject;
 // þó svo activity deyi, t.d. við device rotation.
 public class NetworkManager {
 
-    private final String mServerUrl= "http://timethief.biz:8080/";
+    //private final String mServerUrl= "http://timethief.biz:8080/";
+    private final String mServerUrl= "http://192.168.120.132:8080/";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
@@ -124,7 +125,9 @@ public class NetworkManager {
                     @Override
                     public void onResponse(String response){
                         Gson gson = new Gson();
+                        Log.e("zzz", response);
                         Entry entry = gson.fromJson(response, Entry.class);
+                        Log.e("zzz", response);
                         if (entry != null)
                             callback.onSuccess(entry);
                         else
@@ -149,6 +152,7 @@ public class NetworkManager {
                     .buildUpon()
                     .appendPath("appclock") //careful that controller listens to this address
                     .appendQueryParameter("token", token)
+                    .appendQueryParameter("department", "Overlord")
                     .build().toString();
         } else {
             clockPath = Uri.parse(mServerUrl)

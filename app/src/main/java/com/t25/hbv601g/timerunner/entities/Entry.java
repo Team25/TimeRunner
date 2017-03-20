@@ -1,6 +1,5 @@
 package com.t25.hbv601g.timerunner.entities;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -9,67 +8,67 @@ import java.util.List;
 
 public class Entry {
 
-    private long mId;
-    private List<Comment> mComments;
-    private String mDepartment;
-    private Timestamp mInTime;
-    private Timestamp mOutTime;
-    private boolean mVerified;
+    private long id;
+    private List<Comment> comments;
+    private String department;
+    private String inTime;
+    private String outTime;
+    private boolean verified;
 
-    public Entry(long id, List<Comment> comments, String department, Timestamp inTime, Timestamp outTime, boolean isVerified) {
-        mId = id;
-        mComments = comments;
-        mDepartment = department;
-        mInTime = inTime;
-        mOutTime = outTime;
-        mVerified = isVerified;
+    public Entry(long id, List<Comment> comments, String department, String inTime, String outTime, boolean verified) {
+        this.id = id;
+        this.comments = comments;
+        this.department = department;
+        this.inTime = inTime;
+        this.outTime = outTime;
+        this.verified = verified;
     }
 
     public long getId() {
-        return mId;
+        return id;
     }
 
     public void setId(long id) {
-        mId = id;
+        this.id = id;
     }
 
     public List<Comment> getComments() {
-        return mComments;
+        return comments;
     }
 
     public void setComments(List<Comment> comments) {
-        mComments = comments;
+        this.comments = comments;
     }
 
     public String getDepartment() {
-        return mDepartment;
+        return department;
     }
 
     public void setDepartment(String department) {
-        mDepartment = department;
+        this.department = department;
     }
 
-    public Timestamp getInTime() {
-        return mInTime;
+    public String getInTime() {
+        return inTime;
     }
 
-    public void setInTime(Timestamp inTime) {
-        mInTime = inTime;
+    public void setInTime(String inTime) {
+        this.inTime = inTime;
     }
 
-    public Timestamp getOutTime() {
-        return mOutTime;
+    public String getOutTime() {
+        return outTime;
     }
 
-    public void setOutTime(Timestamp outTime) {
-        mOutTime = outTime;
+    public void setOutTime(String outTime) {
+        this.outTime = outTime;
     }
 
     public boolean isVerified() {
-        return mVerified;
+        return verified;
     }
 
     public void setVerified(boolean verified) {
-        mVerified = verified;
+        this.verified = verified;
     }
 }

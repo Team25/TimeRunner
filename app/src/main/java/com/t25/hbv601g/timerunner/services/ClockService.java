@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.communications.ClockCallback;
 import com.t25.hbv601g.timerunner.communications.NetworkManager;
@@ -58,14 +59,16 @@ public class ClockService {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onSuccess(Entry entry) {
-                if(entry.getOutTime() == null){
+                Gson zz = new Gson();
+                Log.e("FLE", zz.toJson(entry));
+                if(entry.getOutTime() != null){
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
-                    button.setText(mContext.getString(R.string.clock_out_btn_text));
+                    button.setText(mContext.getString(R.string.clock_in_btn_text));
                 } else {
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_in_toast), Toast.LENGTH_LONG).show();
-                    button.setText(mContext.getString(R.string.clock_in_btn_text));
+                    button.setText(mContext.getString(R.string.clock_out_btn_text));
                 }
                 mCurrentEntry = entry;
 
