@@ -106,7 +106,11 @@ public class NetworkManager {
 
     public void resetPassword(String username, final LoginCallback callback) {
         //TODO Unimplemented. Ignore for now.
+        //String resetPath = String.format("appreset?userName=%s", username);
+
         // callback.onFailure("error");
+
+
     }
 
     // Athugum hvort að user sé clocked in.
