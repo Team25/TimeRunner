@@ -31,8 +31,7 @@ import org.json.JSONObject;
 // services Með callbacks.
 public class NetworkManager {
 
-    //private final String mServerUrl= "http://timethief.biz:8080/";
-    private final String mServerUrl= "http://192.168.1.68:8080/";
+    private final String mServerUrl= "http://timethief.biz:8080/";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
