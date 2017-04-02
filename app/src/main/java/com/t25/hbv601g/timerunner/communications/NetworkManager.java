@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.t25.hbv601g.timerunner.entities.Entry;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -30,7 +31,8 @@ import org.json.JSONObject;
 // services Með callbacks.
 public class NetworkManager {
 
-    private final String mServerUrl= "http://timethief.biz:8080/";
+    //private final String mServerUrl= "http://timethief.biz:8080/";
+    private final String mServerUrl= "http://192.168.1.68:8080/";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
@@ -106,10 +108,20 @@ public class NetworkManager {
 
     public void resetPassword(String username, final LoginCallback callback) {
         //TODO Unimplemented. Ignore for now.
-        //String resetPath = String.format("appreset?userName=%s", username);
+        String resetPath = String.format("appreset?userName=%s", username);
 
-        // callback.onFailure("error");
-
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (Request.Method.GET, mServerUrl + resetPath, new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response){ callback.onSuccess(response);) }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        callback.onFailure(error.toString());
+                    }
+                }
+                );
+        mQueue.add(jsonRequest);
 
     }
 
