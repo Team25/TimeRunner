@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="notifications_new_message"
+        android:title="@string/pref_title_new_message_notifications" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:dependency="notifications_new_message"
+        android:key="notifications_new_message_vibrates"
+        android:title="@string/pref_title_message_vibrate" />
+
+    <RingtonePreference
+        android:defaultValue="content://settings/system/notification_sound"
+        android:dependency="notifications_new_message"
+        android:key="notifications_new_message_alert_sound"
+        android:ringtoneType="notification"
+        android:title="@string/pref_title_message_alert_sound" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="notifications_clock_reminder"
+        android:title="@string/pref_title_clock_notifications" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:dependency="notifications_clock_reminder"
+        android:key="notifications_clock_vibrates"
+        android:title="@string/pref_title_clock_vibrate" />
+
+    <RingtonePreference
+        android:defaultValue="content://settings/system/notification_sound"
+        android:dependency="notifications_clock_reminder"
+        android:key="notifications_clock_alert_sound"
+        android:ringtoneType="notification"
+        android:title="@string/pref_title_clock_alert_sound" />
+
+</PreferenceScreen>

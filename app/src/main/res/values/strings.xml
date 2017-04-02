@@ -18,4 +18,45 @@
     <string name="clock_in_reminder_ticker">Want to clock in?</string>
     <string name="clock_in_reminder_title">Clock in to TimeRunner?</string>
     <string name="clock_in_reminder_text">Tap to clock in</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_enable_messenger">Enable messenger</string>
+    <string name="pref_description_enable_messenger">Enable the messaging feature. If
+        enabled, you will be shown as available for messaging to co-workers.
+    </string>
+
+    <string name="pref_title_left_handed">Left handed layout</string>
+    <string name="pref_left_handed">Change the layout of the menus to better fit left-handed
+        users when using one hand.
+    </string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_message_alert_sound">Message sound</string>
+    <string name="pref_title_message_vibrate">Vibrate on message</string>
+
+    <string name="pref_alert_silent">Silent</string>
+
+
+    <string name="pref_title_clock_notifications">Clock reminder notifications</string>
+    <string name="pref_title_clock_alert_sound">Clock reminder sound</string>
+    <string name="pref_title_clock_vibrate">Vibrate on clock reminder</string>
+
 </resources>

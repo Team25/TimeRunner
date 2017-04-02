@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enable_messenger"
+        android:summary="@string/pref_description_enable_messenger"
+        android:title="@string/pref_title_enable_messenger" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="enable_left_handed"
+        android:summary="@string/pref_left_handed"
+        android:title="@string/pref_title_left_handed" />
+
+</PreferenceScreen>

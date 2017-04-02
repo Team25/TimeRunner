@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class ClockActivity extends AppCompatActivity {
     private TextView mCurrentEmployeeDisplay;
     private Button mBtnDeleteToken;
     private Button mBtnClock;
+    private ImageButton mBtnSettings;
     private NotificationCompat.Builder mClockNotification;
     private static final int mUniqueNotificationId = 13371337; // We don't mind overwriting older notifications
     private ClockService mClockService;
@@ -39,6 +41,16 @@ public class ClockActivity extends AppCompatActivity {
         mCurrentEmployeeDisplay = (TextView) findViewById(R.id.employee_name);
 
         mCurrentEmployeeDisplay.setText(token);
+
+        mBtnSettings = (ImageButton) findViewById(R.id.btn_settings);
+
+        mBtnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(ClockActivity.this, SettingsActivity.class);
+                ClockActivity.this.startActivity(settingsIntent);
+            }
+        });
 
         mBtnDeleteToken = (Button) findViewById(R.id.btn_delete_token);
 
