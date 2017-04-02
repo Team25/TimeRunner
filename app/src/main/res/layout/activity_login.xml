@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
@@ -7,6 +8,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@color/colorBackground"
     tools:context="com.t25.hbv601g.timerunner.LoginActivity">
 
     <EditText
@@ -16,9 +18,13 @@
         android:ems="10"
         android:id="@+id/input_login_username"
         android:hint="@string/user_name_hint"
+        android:textColorHint="@color/colorSecondary"
+        android:backgroundTint="@color/colorAccent"
+        android:textColorHighlight="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="94dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp"
         android:layout_alignParentEnd="true" />
 
     <EditText
@@ -27,6 +33,10 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/input_login_password"
+        android:textColorHint="@color/colorSecondary"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHighlight="@color/colorPrimary"
         android:hint="@string/password_hint"
         android:layout_alignTop="@+id/input_login_username"
         android:layout_alignParentStart="true"
@@ -38,8 +48,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login_button"
+        android:background="@color/colorSecondary"
+        android:textColor="@color/colorBackground"
         android:layout_below="@+id/input_login_password"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp" />
 
     <TextView
         android:text="@string/forgot_password"
@@ -48,5 +61,16 @@
         android:id="@+id/text_login_reclaimPassword"
         android:layout_below="@+id/login_button"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="19dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logo_gray_yellow"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
 </RelativeLayout>

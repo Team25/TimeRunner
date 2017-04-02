@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide(); // Losna við title bar.
         setContentView(R.layout.activity_login);
 
         mLoginButton = (Button) findViewById(R.id.login_button);
