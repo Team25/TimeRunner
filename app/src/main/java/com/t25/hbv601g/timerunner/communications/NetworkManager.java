@@ -110,16 +110,19 @@ public class NetworkManager {
         String resetPath = String.format("appreset?userName=%s", username);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (Request.Method.GET, mServerUrl + resetPath, new Response.Listener<JSONObject>(){
+                (Request.Method.GET, mServerUrl + resetPath, null, new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response){ callback.onSuccess(response);) }
+                    public void onResponse(JSONObject response) {
+                        callback.onSuccess(response);
+                    }
                 }, new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error){
+                    public void onErrorResponse(VolleyError error) {
                         callback.onFailure(error.toString());
                     }
-                }
-                );
+                });
+
+
         mQueue.add(jsonRequest);
 
     }
