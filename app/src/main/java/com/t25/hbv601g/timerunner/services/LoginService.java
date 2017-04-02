@@ -149,7 +149,7 @@ public class LoginService {
         mNetworkManager.resetPassword(username, new LoginCallback() {
             @Override
             public void onSuccess(JSONObject obj) {
-                if (obj != null) {
+                if (obj.length() != 0) {
                     Intent intent = new Intent (mContext, LoginActivity.class);
                     mContext.startActivity(intent);
                 } else {
