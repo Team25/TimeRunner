@@ -59,8 +59,9 @@ public class ClockService {
                     clockNotification.setWhen(System.currentTimeMillis());
                     clockNotification.setContentTitle(mContext.getString(R.string.clock_in_reminder_title));
                     clockNotification.setContentText(mContext.getString(R.string.clock_in_reminder_text));
-                    if (vibrateEnabled)
-                        clockNotification.setVibrate(new long[] {500, 500});
+                    if (vibrateEnabled) {
+                        clockNotification.setVibrate(new long[]{500, 500});
+                    }
                     clockNotification.setSound(soundNotification);
                     clockNotification.setLights(Color.RED, 500, 500);
 
