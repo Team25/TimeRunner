@@ -19,9 +19,19 @@
         android:title="@string/pref_title_message_alert_sound" />
 
     <SwitchPreference
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:key="notifications_clock_reminder"
         android:title="@string/pref_title_clock_notifications" />
+
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_wifi_name"
+        android:dependency="notifications_clock_reminder"
+        android:key="notifications_wifi_name"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_wifi_name" />
 
     <SwitchPreference
         android:defaultValue="true"
