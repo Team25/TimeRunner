@@ -55,7 +55,7 @@
 
 
     <string name="pref_title_clock_notifications">Clock reminder notifications</string>
-    <string name="pref_title_wifi_name">Office WiFi Netowrk Name</string>
+    <string name="pref_title_wifi_name">Office WiFi Network Name</string>
     <string name="pref_default_wifi_name">Work-WiFi</string>
     <string name="pref_title_clock_alert_sound">Clock reminder sound</string>
     <string name="pref_title_clock_vibrate">Vibrate on clock reminder</string>

@@ -5,7 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Ringtone;
 import android.graphics.Color;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Button;
 import android.widget.Toast;
@@ -43,14 +47,21 @@ public class ClockService {
             public void onSuccess(Entry entry) {
                 mCurrentEntry = entry;
                 if(entry==null){
-                    // Todo something if user is not clocked in
+                    // Get user preferences
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext.getApplicationContext());
+                    boolean vibrateEnabled = sharedPref.getBoolean("notifications_clock_vibrates", false);
+                    String strRingtonePreference = sharedPref.getString("notifications_clock_alert_sound", "DEFAULT_SOUND");
+                    Uri soundNotification = Uri.parse(strRingtonePreference);
+
                     // Build the notification
                     clockNotification.setSmallIcon(R.drawable.running_man);
                     clockNotification.setTicker(mContext.getString(R.string.clock_in_reminder_ticker));
                     clockNotification.setWhen(System.currentTimeMillis());
                     clockNotification.setContentTitle(mContext.getString(R.string.clock_in_reminder_title));
                     clockNotification.setContentText(mContext.getString(R.string.clock_in_reminder_text));
-                    clockNotification.setVibrate(new long[] {2000, 500});
+                    if (vibrateEnabled)
+                        clockNotification.setVibrate(new long[] {500, 500});
+                    clockNotification.setSound(soundNotification);
                     clockNotification.setLights(Color.RED, 500, 500);
 
                     Intent clockInIntent = new Intent(mContext, ClockActivity.class);
