@@ -20,6 +20,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide(); // Losna við title bar.
         setContentView(R.layout.activity_reset_password);
 
         mLoginService = new LoginService(this);
