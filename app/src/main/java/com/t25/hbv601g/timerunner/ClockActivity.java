@@ -27,7 +27,6 @@ public class ClockActivity extends AppCompatActivity {
     private TextView mCurrentEmployeeDisplay;
     private ImageButton mBtnPopupMenu;
     private Button mBtnClock;
-    private ImageButton mBtnSettings;
     private NotificationCompat.Builder mClockNotification;
     private static final int mUniqueNotificationId = 13371337; // We don't mind overwriting older notifications
     private ClockService mClockService;
@@ -43,7 +42,6 @@ public class ClockActivity extends AppCompatActivity {
 
         final UserLocalStorage localStorage = UserLocalStorage.getInstance(this);
 
-        String token = localStorage.getToken();
         mCurrentEmployeeDisplay = (TextView) findViewById(R.id.employee_name);
 
         Bundle employeeBundle = getIntent().getExtras();
@@ -51,16 +49,6 @@ public class ClockActivity extends AppCompatActivity {
             mEmployee = (Employee) employeeBundle.getSerializable("currentEmployee");
 
         if (mEmployee != null) mCurrentEmployeeDisplay.setText(mEmployee.getFullName());
-
-        mBtnSettings = (ImageButton) findViewById(R.id.btn_settings);
-
-        mBtnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent settingsIntent = new Intent(ClockActivity.this, SettingsActivity.class);
-                ClockActivity.this.startActivity(settingsIntent);
-            }
-        });
 
         mBtnPopupMenu = (ImageButton) findViewById(R.id.btn_popup_menu);
 
@@ -71,7 +59,6 @@ public class ClockActivity extends AppCompatActivity {
 
                 MenuInflater inflater = popupMenu.getMenuInflater();
                 inflater.inflate(R.menu.menu, popupMenu.getMenu());
-                //popupMenu.inflate(R.menu.menu);
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
