@@ -119,7 +119,7 @@ public class ClockActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO Add check for which notification we are experiencing, clock-in or clock-out.
-            mClockService.notifyIfClockedOut(mClockNotification, mUniqueNotificationId);
+            mClockService.notifyIfClockedOut(mClockNotification, mUniqueNotificationId, mEmployee);
         }
     };
 

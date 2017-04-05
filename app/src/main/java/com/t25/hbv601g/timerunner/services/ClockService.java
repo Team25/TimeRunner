@@ -52,7 +52,7 @@ public class ClockService {
         mTimerHandler = timerHandler;
     }
 
-    public void notifyIfClockedOut(final NotificationCompat.Builder clockNotification, final int uniqueNotificationId){
+    public void notifyIfClockedOut(final NotificationCompat.Builder clockNotification, final int uniqueNotificationId, final Employee employee){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
             @Override
@@ -71,14 +71,14 @@ public class ClockService {
                     clockNotification.setWhen(System.currentTimeMillis());
                     clockNotification.setContentTitle(mContext.getString(R.string.clock_in_reminder_title));
                     clockNotification.setContentText(mContext.getString(R.string.clock_in_reminder_text));
-                    if (vibrateEnabled != false) {
+                    if (vibrateEnabled)
                         clockNotification.setVibrate(new long[]{500, 500});
-                    }
                     clockNotification.setSound(soundNotification);
                     clockNotification.setLights(Color.RED, 500, 500);
 
                     Intent clockInIntent = new Intent(mContext, ClockActivity.class);
                     clockInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    clockInIntent.putExtra("currentEmployee", employee);
 
                     // Give Android OS access to our app's newly created intent.
                     PendingIntent pendingClockIntent = PendingIntent.getActivity(mContext, 0, clockInIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -87,8 +87,6 @@ public class ClockService {
                     // Issue the notification
                     NotificationManager nm =  (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
                     nm.notify(uniqueNotificationId, clockNotification.build());
-                } else {
-                    // Todo Nothing if he is not clocked in
                 }
             }
 
