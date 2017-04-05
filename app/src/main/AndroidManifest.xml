@@ -17,7 +17,8 @@
             android:name=".LoginActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ClockActivity"/>
+        <activity android:name=".ClockActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LogoActivity"
             android:noHistory="true"
