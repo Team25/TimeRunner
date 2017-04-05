@@ -31,7 +31,7 @@ public class ClockActivity extends AppCompatActivity {
 
     private TextView mCurrentEmployeeDisplay;
     private ImageButton mBtnPopupMenu;
-    private Button mBtnClock;
+    private ImageButton mBtnClock;
     private NotificationCompat.Builder mClockNotification;
     private static final int mUniqueNotificationId = 13371337; // We don't mind overwriting older notifications
     private ClockService mClockService;
@@ -97,7 +97,7 @@ public class ClockActivity extends AppCompatActivity {
             }
         });
 
-        mBtnClock = (Button) findViewById(R.id.btn_clock);
+        mBtnClock = (ImageButton) findViewById(R.id.btn_clock);
         //TODO check if user is clocked in or out and put right text on button
         mClockService.setClockedButtonText(mBtnClock, mClockDurationLabel);
 

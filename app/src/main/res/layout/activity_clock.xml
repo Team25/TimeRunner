@@ -33,11 +33,12 @@
         android:layout_above="@+id/employee_name"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clock!"
+        app:srcCompat="@drawable/clock_in"
+        android:background="@color/colorBackground"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

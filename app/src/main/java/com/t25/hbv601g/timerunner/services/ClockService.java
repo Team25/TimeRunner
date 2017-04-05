@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,7 +104,7 @@ public class ClockService {
         });
     }
 
-    public void setClockedButtonText(final Button button,
+    public void setClockedButtonText(final ImageButton button,
                                      final TextView timerLab){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
@@ -111,12 +112,12 @@ public class ClockService {
             public void onSuccess(Entry entry) {
                 mCurrentEntry = entry;
                 if(entry==null){
-                    button.setText(mContext.getString(R.string.clock_in_btn_text));
+                    button.setImageResource(R.drawable.clock_in);
                     timerLab.setVisibility(View.INVISIBLE);
                     mTimerDisplay.setText("00:00:00");
                     mTimerDisplay.setVisibility(View.INVISIBLE);
                 } else {
-                    button.setText(mContext.getString(R.string.clock_out_btn_text));
+                    button.setImageResource(R.drawable.clock_out);
                     timerLab.setText(R.string.clock_duration_lab);
                     mTimerDisplay.setVisibility(View.VISIBLE);
                     timerLab.setVisibility(View.VISIBLE);
@@ -162,7 +163,7 @@ public class ClockService {
         }, 0, 1000);
     }
 
-    public void clock(final Button button,
+    public void clock(final ImageButton button,
                       final TextView timerLab){
         String token = mLocalStorage.getToken();
         mNetworkManager.clockInOut(token, mCurrentEntry, new ClockCallback(){
@@ -173,7 +174,7 @@ public class ClockService {
                 if(entry.getOutTime() != null){
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
-                    button.setText(mContext.getString(R.string.clock_in_btn_text));
+                    button.setImageResource(R.drawable.clock_in);
                     timerLab.setVisibility(View.INVISIBLE);
                     mTimerDisplay.setText("00:00:00");
                     mTimer.cancel();
@@ -181,7 +182,7 @@ public class ClockService {
                 } else {
                     mLocalStorage.saveClockInTime(String.valueOf(System.currentTimeMillis()));
 
-                    button.setText(mContext.getString(R.string.clock_out_btn_text));
+                    button.setImageResource(R.drawable.clock_out);
                     timerLab.setVisibility(View.VISIBLE);
                     mTimerDisplay.setVisibility(View.VISIBLE);
                     initClockTimer();
