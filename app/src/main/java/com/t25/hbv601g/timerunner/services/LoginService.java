@@ -150,6 +150,10 @@ public class LoginService {
             @Override
             public void onSuccess(JSONObject obj) {
                 if (obj.length() != 0) {
+                    Toast.makeText(mContext,
+                            "Instructions sent by email.",
+                            Toast.LENGTH_LONG).show();
+
                     Intent intent = new Intent (mContext, LoginActivity.class);
                     mContext.startActivity(intent);
                 } else {
