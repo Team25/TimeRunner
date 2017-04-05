@@ -60,25 +60,25 @@
         android:layout_marginTop="19dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/clock_duration_lab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/clock_duration"
+        android:text="@string/clock_duration_lab"
         android:textColor="@color/colorSecondary"
         android:textSize="20dp"
-        android:layout_marginBottom="18dp"
-        android:layout_above="@+id/textView2"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/timer_display"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/timer_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5:24:32"
+        android:text="@string/timer_initial"
         android:layout_marginBottom="61dp"
         android:layout_above="@+id/imageView"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="22dp"
+        android:textSize="26dp"
         android:layout_centerHorizontal="true" />
 
     <ImageButton

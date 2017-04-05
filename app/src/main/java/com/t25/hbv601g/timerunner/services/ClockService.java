@@ -9,9 +9,13 @@ import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.t25.hbv601g.timerunner.ClockActivity;
@@ -20,6 +24,11 @@ import com.t25.hbv601g.timerunner.communications.ClockCallback;
 import com.t25.hbv601g.timerunner.communications.NetworkManager;
 import com.t25.hbv601g.timerunner.entities.Entry;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
+
+import org.w3c.dom.Text;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -33,11 +42,17 @@ public class ClockService {
     private final Context mContext;
     private UserLocalStorage mLocalStorage;
     private Entry mCurrentEntry; //ekki í uml
+    private Timer mTimer;
+    long totalSeconds; // used with timer
+    public TextView mTimerDisplay;
+    public Handler mTimerHandler;
 
-    public ClockService(Context context) {
+    public ClockService(Context context, TextView timerDisplay, Handler timerHandler) {
         mNetworkManager = NetworkManager.getInstance(context);
         mLocalStorage = UserLocalStorage.getInstance(context);
         mContext = context;
+        mTimerDisplay = timerDisplay;
+        mTimerHandler = timerHandler;
     }
 
     public void notifyIfClockedOut(final NotificationCompat.Builder clockNotification, final int uniqueNotificationId){
@@ -88,7 +103,8 @@ public class ClockService {
         });
     }
 
-    public void setClockedButtonText(final Button button){
+    public void setClockedButtonText(final Button button,
+                                     final TextView timerLab){
         String token = mLocalStorage.getToken();
         mNetworkManager.getOpenClockEntry(token, new ClockCallback() {
             @Override
@@ -96,8 +112,15 @@ public class ClockService {
                 mCurrentEntry = entry;
                 if(entry==null){
                     button.setText(mContext.getString(R.string.clock_in_btn_text));
+                    timerLab.setVisibility(View.INVISIBLE);
+                    mTimerDisplay.setText("00:00:00");
+                    mTimerDisplay.setVisibility(View.INVISIBLE);
                 } else {
                     button.setText(mContext.getString(R.string.clock_out_btn_text));
+                    timerLab.setText(R.string.clock_duration_lab);
+                    mTimerDisplay.setVisibility(View.VISIBLE);
+                    timerLab.setVisibility(View.VISIBLE);
+                    initClockTimer();
                 }
             }
 
@@ -109,7 +132,38 @@ public class ClockService {
         });
     }
 
-    public void clock(final Button button){
+    final Runnable updateUiTimer = new Runnable() {
+        @Override
+        public void run() {
+            mTimerDisplay.setText(String.format("%02d:%02d:%02d",
+                    totalSeconds / 3600,
+                    (totalSeconds % 3600) / 60,
+                    (totalSeconds % 60)));
+            totalSeconds++;
+        }
+    };
+
+    private void initClockTimer() {
+        String clockInTimeStr = mLocalStorage.getClockInTime();
+        if (clockInTimeStr == null) return;
+        long clockInTime = Long.parseLong(clockInTimeStr);
+        long currentTime = System.currentTimeMillis();
+
+        long elapsedClockTime = currentTime - clockInTime;
+        totalSeconds = elapsedClockTime / 1000;
+
+        mTimerDisplay.setVisibility(View.VISIBLE);
+        mTimer = new Timer();
+        mTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                mTimerHandler.post(updateUiTimer);
+            }
+        }, 0, 1000);
+    }
+
+    public void clock(final Button button,
+                      final TextView timerLab){
         String token = mLocalStorage.getToken();
         mNetworkManager.clockInOut(token, mCurrentEntry, new ClockCallback(){
 
@@ -120,10 +174,17 @@ public class ClockService {
                     Toast.makeText(mContext,
                             mContext.getString(R.string.clock_out_toast), Toast.LENGTH_LONG).show();
                     button.setText(mContext.getString(R.string.clock_in_btn_text));
+                    timerLab.setVisibility(View.INVISIBLE);
+                    mTimerDisplay.setText("00:00:00");
+                    mTimer.cancel();
+                    mTimerDisplay.setVisibility(View.INVISIBLE);
                 } else {
-                    Toast.makeText(mContext,
-                            mContext.getString(R.string.clock_in_toast), Toast.LENGTH_LONG).show();
+                    mLocalStorage.saveClockInTime(String.valueOf(System.currentTimeMillis()));
+
                     button.setText(mContext.getString(R.string.clock_out_btn_text));
+                    timerLab.setVisibility(View.VISIBLE);
+                    mTimerDisplay.setVisibility(View.VISIBLE);
+                    initClockTimer();
                 }
                 mCurrentEntry = entry;
 

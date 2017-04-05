@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
@@ -21,6 +22,10 @@ import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 import com.t25.hbv601g.timerunner.services.ClockService;
 
+import org.w3c.dom.Text;
+
+
+
 
 public class ClockActivity extends AppCompatActivity {
 
@@ -31,18 +36,26 @@ public class ClockActivity extends AppCompatActivity {
     private static final int mUniqueNotificationId = 13371337; // We don't mind overwriting older notifications
     private ClockService mClockService;
     private Employee mEmployee;
+    private TextView mClockDurationLabel;
+    private TextView mTimerDisplay;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mClockService = new ClockService(this);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_clock);
 
         final UserLocalStorage localStorage = UserLocalStorage.getInstance(this);
 
         mCurrentEmployeeDisplay = (TextView) findViewById(R.id.employee_name);
+        mClockDurationLabel = (TextView) findViewById(R.id.clock_duration_lab);
+        mTimerDisplay = (TextView) findViewById(R.id.timer_display);
+
+        mTimerDisplay.setVisibility(View.INVISIBLE);
+        mClockDurationLabel.setVisibility(View.INVISIBLE);
+
+        mClockService = new ClockService(this, mTimerDisplay, new Handler());
 
         Bundle employeeBundle = getIntent().getExtras();
         if (employeeBundle != null)
@@ -86,13 +99,13 @@ public class ClockActivity extends AppCompatActivity {
 
         mBtnClock = (Button) findViewById(R.id.btn_clock);
         //TODO check if user is clocked in or out and put right text on button
-        mClockService.setClockedButtonText(mBtnClock);
+        mClockService.setClockedButtonText(mBtnClock, mClockDurationLabel);
 
         mBtnClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO clock in/out and have brogress circle while we wait for confirmation from server
-                mClockService.clock(mBtnClock);
+                //TODO clock in/out and have progress circle while we wait for confirmation from server
+                mClockService.clock(mBtnClock, mClockDurationLabel);
             }
 
         });

@@ -21,6 +21,7 @@ public class UserLocalStorage {
     private SharedPreferences mUserLocalDatabase;
     private final String TOKEN_KEY = "token_key";
     private final String SETTINGS_KEY = "settings_key";
+    private final String CLOCK_IN_TIMER_KEY = "timer_key";
 
     private UserLocalStorage(Context context) {
         //TODO make local storage work from a nonactivity class. consider sql if it turns out to be difficult
@@ -32,6 +33,16 @@ public class UserLocalStorage {
             instance = new UserLocalStorage(context);
         }
         return instance;
+    }
+
+    public void saveClockInTime(String clockInTime) {
+        mUserLocalDatabase.edit()
+                .putString(CLOCK_IN_TIMER_KEY, clockInTime)
+                .apply();
+    }
+
+    public String getClockInTime() {
+        return mUserLocalDatabase.getString(CLOCK_IN_TIMER_KEY, null);
     }
 
     /**

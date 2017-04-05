@@ -77,7 +77,7 @@ public class LoginService {
     }
 
     private void intentDelayHandler(final Employee employee, final long elapsedTime) {
-        final long delay = 2000 - elapsedTime;
+        final long delay = 1000 - elapsedTime;
 
         // Nýr þráður svo hægt sé að sleepa án þess að frysta UI áður en það
         // fær séns á að rendera.
