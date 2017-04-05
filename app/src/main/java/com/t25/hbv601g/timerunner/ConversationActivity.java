@@ -9,5 +9,8 @@ public class ConversationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
+
+        ConversationListFragment conversationList = new ConversationListFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.conversation, conversationList).commit();
     }
 }

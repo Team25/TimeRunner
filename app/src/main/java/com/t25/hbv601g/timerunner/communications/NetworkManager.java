@@ -13,11 +13,16 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.entities.Entry;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Óli Legend on 13.3.2017.
@@ -31,7 +36,8 @@ import org.json.JSONObject;
 // services Með callbacks.
 public class NetworkManager {
 
-    private final String mServerUrl= "http://timethief.biz:8080/";
+    //private final String mServerUrl= "http://timethief.biz:8080/";
+    private final String mServerUrl = "http://10.0.2.2:8080";
     private String mToken;
     private UserLocalStorage mLocalStorage;
     private static RequestQueue mQueue;
@@ -199,4 +205,35 @@ public class NetworkManager {
         mQueue.add(stringRequest);
     }
 
+    public void getUserList(String token, final EmployeeListCallback callback) {
+
+        String employeeListPath;
+        employeeListPath = Uri.parse(mServerUrl)
+                .buildUpon()
+                .appendPath("appemployeelist") //careful that controller listens to this address
+                .appendQueryParameter("token", token)
+                .build().toString();
+        Log.e("stuff", "getUserList: Do we get here?");
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.GET, employeeListPath, new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response){
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Employee>>(){}.getType();
+                        Log.e("jsonString","json: " + response);
+                        List<Employee> employeeList = gson.fromJson(response, listType);
+                        Log.e("tag", "onResponse: " + (employeeList.get(0).getFullName()));
+
+                        callback.onSuccess(employeeList);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        callback.onFailure(error.toString());
+                    }
+                }
+                );
+        mQueue.add(stringRequest);
+        //TODO: finish getting employee list from network (make sure it works on server side also)
+    }
 }

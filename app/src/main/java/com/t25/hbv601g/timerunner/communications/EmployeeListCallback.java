@@ -8,8 +8,9 @@ import java.util.List;
  * Created by dingo on 4.4.2017.
  */
 
-public interface EmployeeListCollback  {
+public interface EmployeeListCallback {
 
     void onSuccess(List<Employee> employeeList);
+
     void onFailure(String error);
 }
