@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 import com.t25.hbv601g.timerunner.services.ClockService;
 
@@ -30,6 +31,7 @@ public class ClockActivity extends AppCompatActivity {
     private NotificationCompat.Builder mClockNotification;
     private static final int mUniqueNotificationId = 13371337; // We don't mind overwriting older notifications
     private ClockService mClockService;
+    private Employee mEmployee;
 
 
     @Override
@@ -44,7 +46,11 @@ public class ClockActivity extends AppCompatActivity {
         String token = localStorage.getToken();
         mCurrentEmployeeDisplay = (TextView) findViewById(R.id.employee_name);
 
-        mCurrentEmployeeDisplay.setText(token);
+        Bundle employeeBundle = getIntent().getExtras();
+        if (employeeBundle != null)
+            mEmployee = (Employee) employeeBundle.getSerializable("currentEmployee");
+
+        if (mEmployee != null) mCurrentEmployeeDisplay.setText(mEmployee.getFullName());
 
         mBtnSettings = (ImageButton) findViewById(R.id.btn_settings);
 

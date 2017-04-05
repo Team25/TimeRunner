@@ -52,10 +52,10 @@ public class LoginService {
 
                     if (employee.length() != 0) {
                         try {
-                            employeeMobile = new Employee(employee.getInt("id"),
-                                    employee.getString("fullName"),
-                                    employee.getString("phoneNumber"),
-                                    employee.getString("token"));
+                            employeeMobile = new Employee(employee.getInt("mId"),
+                                    employee.getString("mFullName"),
+                                    employee.getString("mPhoneNumber"),
+                                    employee.getString("mToken"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -115,10 +115,10 @@ public class LoginService {
                 if (employee.length() != 0) {
                     Employee employeeMobile = null;
                     try {
-                        employeeMobile = new Employee(employee.getInt("id"),
-                                employee.getString("fullName"),
-                                employee.getString("phoneNumber"),
-                                employee.getString("token"));
+                        employeeMobile = new Employee(employee.getInt("mId"),
+                                employee.getString("mFullName"),
+                                employee.getString("mPhoneNumber"),
+                                employee.getString("mToken"));
 
                         mLocalStorage.saveToken(employeeMobile.getToken());
                     } catch (JSONException e) {
