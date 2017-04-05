@@ -9,53 +9,38 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimary"
     tools:context="com.t25.hbv601g.timerunner.ClockActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="You've made it to Clock Activity!"
-        android:textSize="22dp"/>
 
     <TextView
         android:id="@+id/employee_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView"
+        android:text="@string/employee_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22dp"
+        android:layout_above="@+id/btn_clock"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="96dp"
-        android:text="Some shit"
-        android:textSize="18dp"/>
-
-    <Button
-        android:id="@+id/btn_delete_token"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:text="Delete token"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="26dp" />
 
     <TextView
         android:id="@+id/lab_token"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/employee_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp"
-        android:text="Your token:" />
+        android:textColor="@color/colorSecondary"
+        android:textSize="26dp"
+        android:text="@string/welcome"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/textClock"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btn_clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:text="Clock!"/>
+        android:text="Clock!"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/btn_settings"
@@ -66,5 +51,54 @@
         android:background="@android:color/transparent"
         android:tint="@android:color/holo_orange_light"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logo_gray_yellow"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:id="@+id/btn_popup_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/arrow_down_float"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorSecondary"
+        android:textSize="30dp"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/btn_settings"
+        android:layout_alignStart="@+id/lab_token" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clock_duration"
+        android:textColor="@color/colorSecondary"
+        android:textSize="20dp"
+        android:layout_marginBottom="18dp"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5:24:32"
+        android:layout_marginBottom="61dp"
+        android:layout_above="@+id/imageView"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22dp"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -7,6 +7,9 @@ import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,7 +24,7 @@ import com.t25.hbv601g.timerunner.services.ClockService;
 public class ClockActivity extends AppCompatActivity {
 
     private TextView mCurrentEmployeeDisplay;
-    private Button mBtnDeleteToken;
+    private ImageButton mBtnPopupMenu;
     private Button mBtnClock;
     private ImageButton mBtnSettings;
     private NotificationCompat.Builder mClockNotification;
@@ -33,6 +36,7 @@ public class ClockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mClockService = new ClockService(this);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_clock);
 
         final UserLocalStorage localStorage = UserLocalStorage.getInstance(this);
@@ -52,15 +56,38 @@ public class ClockActivity extends AppCompatActivity {
             }
         });
 
-        mBtnDeleteToken = (Button) findViewById(R.id.btn_delete_token);
+        mBtnPopupMenu = (ImageButton) findViewById(R.id.btn_popup_menu);
 
-        mBtnDeleteToken.setOnClickListener(new View.OnClickListener() {
+        mBtnPopupMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (localStorage.removeToken()) {
-                    mCurrentEmployeeDisplay.setText("Dude, where's your token?"); //where is your token dude
-                    Toast.makeText(ClockActivity.this, "token removed", Toast.LENGTH_LONG).show();
-                }
+                PopupMenu popupMenu = new PopupMenu(ClockActivity.this, v);
+
+                MenuInflater inflater = popupMenu.getMenuInflater();
+                inflater.inflate(R.menu.menu, popupMenu.getMenu());
+                //popupMenu.inflate(R.menu.menu);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.settings_menu:
+                                Intent settingsIntent = new Intent(ClockActivity.this, SettingsActivity.class);
+                                ClockActivity.this.startActivity(settingsIntent);
+                                return true;
+                            case R.id.logout_menu:
+                                localStorage.removeToken();
+                                Intent logoutIntent = new Intent(ClockActivity.this, LoginActivity.class);
+                                ClockActivity.this.startActivity(logoutIntent);
+                                ClockActivity.this.finish();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+
+                popupMenu.show();
             }
         });
 

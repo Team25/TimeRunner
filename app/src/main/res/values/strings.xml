@@ -59,6 +59,11 @@
     <string name="pref_default_wifi_name">Work-WiFi</string>
     <string name="pref_title_clock_alert_sound">Clock reminder sound</string>
     <string name="pref_title_clock_vibrate">Vibrate on clock reminder</string>
+    <string name="welcome">Welcome</string>
+    <string name="employee_name">Pussygrabber</string>
+    <string name="clock_duration">You\'ve been clocked in for</string>
+    <string name="settings_menu">Settings</string>
+    <string name="logout_menu">Logout</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
