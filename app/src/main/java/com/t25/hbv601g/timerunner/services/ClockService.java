@@ -66,6 +66,7 @@ public class ClockService {
                     clockNotification.setLights(Color.RED, 500, 500);
 
                     Intent clockInIntent = new Intent(mContext, ClockActivity.class);
+                    clockInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     // Give Android OS access to our app's newly created intent.
                     PendingIntent pendingClockIntent = PendingIntent.getActivity(mContext, 0, clockInIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                     clockNotification.setContentIntent(pendingClockIntent);
