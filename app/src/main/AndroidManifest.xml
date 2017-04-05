@@ -22,6 +22,11 @@
             android:name=".LogoActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".ResetPasswordActivity"/>
 
@@ -35,11 +40,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"/>
         <activity android:name=".ConversationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 
