@@ -12,19 +12,12 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
 import com.t25.hbv601g.timerunner.services.ClockService;
-
-import org.w3c.dom.Text;
-
-
 
 
 public class ClockActivity extends AppCompatActivity {

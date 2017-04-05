@@ -6,15 +6,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Ringtone;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +20,9 @@ import com.t25.hbv601g.timerunner.ClockActivity;
 import com.t25.hbv601g.timerunner.R;
 import com.t25.hbv601g.timerunner.communications.ClockCallback;
 import com.t25.hbv601g.timerunner.communications.NetworkManager;
+import com.t25.hbv601g.timerunner.entities.Employee;
 import com.t25.hbv601g.timerunner.entities.Entry;
 import com.t25.hbv601g.timerunner.repositories.UserLocalStorage;
-
-import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -75,14 +71,15 @@ public class ClockService {
                     clockNotification.setWhen(System.currentTimeMillis());
                     clockNotification.setContentTitle(mContext.getString(R.string.clock_in_reminder_title));
                     clockNotification.setContentText(mContext.getString(R.string.clock_in_reminder_text));
-                    if (vibrateEnabled) {
+                    if (vibrateEnabled != false) {
                         clockNotification.setVibrate(new long[]{500, 500});
                     }
                     clockNotification.setSound(soundNotification);
                     clockNotification.setLights(Color.RED, 500, 500);
 
                     Intent clockInIntent = new Intent(mContext, ClockActivity.class);
-                    clockInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    clockInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+
                     // Give Android OS access to our app's newly created intent.
                     PendingIntent pendingClockIntent = PendingIntent.getActivity(mContext, 0, clockInIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                     clockNotification.setContentIntent(pendingClockIntent);
