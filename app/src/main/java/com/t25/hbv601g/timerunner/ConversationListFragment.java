@@ -1,14 +1,17 @@
 package com.t25.hbv601g.timerunner;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.t25.hbv601g.timerunner.entities.Conversation;
 import com.t25.hbv601g.timerunner.services.InteractionService;
 
 
@@ -17,11 +20,24 @@ import com.t25.hbv601g.timerunner.services.InteractionService;
  */
 public class ConversationListFragment extends Fragment {
 
-    InteractionService mInteractionService;
+    private InteractionService mInteractionService;
+    private Callbacks mCallbacks;
 
 
     public ConversationListFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        mCallbacks = (Callbacks) context;
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        mCallbacks = null;
     }
 
 
@@ -34,23 +50,16 @@ public class ConversationListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_conversation_list, container, false);
 
-        //String[] menuItems = {"lala","lulu", "lale"};
 
         ListView listView = (ListView) view.findViewById(R.id.conversation_list_view);
 
-        mInteractionService.getEmployeeList(listView);
-
-        /*
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                menuItems
-        );
-
-        listView.setAdapter(listViewAdapter);
-        */
+        mInteractionService.getEmployeeList(listView, mCallbacks);
 
         return view;
+    }
+
+    public interface Callbacks {
+        void onConversationSelected(long conversationistId);
     }
 
 }

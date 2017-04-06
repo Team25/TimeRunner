@@ -17,17 +17,20 @@
             android:name=".LoginActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ClockActivity"
+        <activity
+            android:name=".ClockActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".LogoActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            -->
         </activity>
         <activity android:name=".ResetPasswordActivity"/>
 
@@ -40,8 +43,21 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"/>
-        <activity android:name=".ConversationActivity">
+        <activity android:name=".ConversationListActivity">
 
+        </activity>
+        <activity android:name=".ConversationActivity">
+        </activity>
+        <activity android:name=".AttendanceListActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".EntryActivity">
         </activity>
     </application>
 

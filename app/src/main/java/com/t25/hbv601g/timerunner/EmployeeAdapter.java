@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.t25.hbv601g.timerunner.entities.Employee;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -31,8 +33,10 @@ public class EmployeeAdapter extends ArrayAdapter<Employee> {
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.employee_name);
+        TextView id = (TextView) convertView.findViewById(R.id.employee_id);
         // Populate the data into the template view using the data object
         name.setText(employee.getFullName());
+        id.setText(employee.getId()+"");
         // Return the completed view to render on screen
         return convertView;
     }

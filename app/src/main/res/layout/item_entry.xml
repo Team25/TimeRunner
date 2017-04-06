@@ -5,13 +5,13 @@
               android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/employee_name"
+        android:id="@+id/entry_in_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"/>
     <TextView
-        android:id="@+id/employee_id"
+        android:id="@+id/entry_out_time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

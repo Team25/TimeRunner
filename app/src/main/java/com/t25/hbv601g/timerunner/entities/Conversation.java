@@ -42,6 +42,14 @@ public class Conversation {
         this.mId = mId;
     }
 
+    public List<Message> getMessages() {
+        return mMessages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        mMessages = messages;
+    }
+
     public List<Employee> getMembers() {
         return mMembers;
     }

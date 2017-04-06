@@ -1,12 +1,13 @@
 package com.t25.hbv601g.timerunner.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by dingo on 13.3.2017.
  */
 
-public class Entry {
+public class Entry implements Serializable {
 
     private long mId;
     private List<Comment> mComments;
