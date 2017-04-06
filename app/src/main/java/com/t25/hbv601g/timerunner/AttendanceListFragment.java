@@ -78,10 +78,6 @@ public class AttendanceListFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-                        Toast.makeText(getContext() ,
-                                "Click ListItem Number " + position +" : "+id + " ::: " + adapter.getItem(position).getId(), Toast.LENGTH_LONG)
-                                .show();
-
                         mCallbacks.onEntrySelected(adapter.getItem(position));
 
                     }
@@ -99,6 +95,8 @@ public class AttendanceListFragment extends Fragment {
 
         return view;
     }
+
+
 
     public interface Callbacks {
         void onEntrySelected(Entry entry);

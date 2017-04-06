@@ -3,6 +3,7 @@ package com.t25.hbv601g.timerunner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -28,10 +29,14 @@ public class EntryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entry);
 
         // kannski þarf ég að nota UUID hérna?
         Entry entry = (Entry) getIntent().getSerializableExtra(EXTRA_ENTRY_ID);
+
+        setupActionBar(entry.getId());
+        setContentView(R.layout.activity_entry);
+
+
 
         mInTimeTextView = (TextView) findViewById(R.id.entry_in_time);
         mOutTimeTextView = (TextView) findViewById(R.id.entry_out_time);
@@ -53,6 +58,15 @@ public class EntryActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void setupActionBar(long entryID) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Entry ID: " + entryID);
+        }
     }
 
     private static String getDate(long milliSeconds, String dateFormat)

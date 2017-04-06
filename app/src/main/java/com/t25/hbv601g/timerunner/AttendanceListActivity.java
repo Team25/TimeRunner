@@ -1,6 +1,7 @@
 package com.t25.hbv601g.timerunner;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ public class AttendanceListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupActionBar();
         setContentView(R.layout.activity_attendance_list);
 
         AttendanceListFragment attendanceListFragment = new AttendanceListFragment();
@@ -22,5 +24,14 @@ public class AttendanceListActivity extends AppCompatActivity
     public void onEntrySelected(Entry entry) {
         Intent intent = EntryActivity.newIntent(this, entry);
         startActivity(intent);
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("My Entries");
+        }
     }
 }
