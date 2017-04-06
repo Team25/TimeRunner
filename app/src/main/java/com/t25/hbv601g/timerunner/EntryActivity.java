@@ -48,7 +48,7 @@ public class EntryActivity extends AppCompatActivity {
 
         } else {
             mOutTimeTextView.setText("Out Time: This entry is still open");
-            mTotalTimeTextView.setText("Total hours: " + getDate((System.currentTimeMillis()-inTime), "KK:mm:ss"));
+            mTotalTimeTextView.setText("Total clockInTime: " + getDate((System.currentTimeMillis()-inTime), "KK:mm:ss"));
         }
 
 
