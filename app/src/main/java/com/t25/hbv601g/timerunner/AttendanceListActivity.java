@@ -54,8 +54,8 @@ public class AttendanceListActivity extends AppCompatActivity
     }
 
     private boolean returnToClockPage() {
-        Intent intent = new Intent(AttendanceListActivity.this, ClockActivity.class);
-        AttendanceListActivity.this.startActivity(intent);
+        //Intent intent = new Intent(AttendanceListActivity.this, ClockActivity.class);
+        //AttendanceListActivity.this.startActivity(intent);
         this.finish();
         return true;
     }

@@ -88,8 +88,8 @@ public class EntryActivity extends AppCompatActivity {
     }
 
     private boolean returnToAttendanceListPage() {
-        Intent intent = new Intent(EntryActivity.this, AttendanceListActivity.class);
-        EntryActivity.this.startActivity(intent);
+        //Intent intent = new Intent(EntryActivity.this, AttendanceListActivity.class);
+        //EntryActivity.this.startActivity(intent);
         this.finish();
         return true;
     }
