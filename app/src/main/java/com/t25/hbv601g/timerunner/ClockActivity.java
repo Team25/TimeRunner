@@ -80,6 +80,10 @@ public class ClockActivity extends AppCompatActivity {
                                 ClockActivity.this.startActivity(logoutIntent);
                                 ClockActivity.this.finish();
                                 return true;
+                            case R.id.attendance_menu:
+                                Intent entryIntent = new Intent(ClockActivity.this, AttendanceListActivity.class);
+                                ClockActivity.this.startActivity(entryIntent);
+                                return true;
                             default:
                                 return false;
                         }
