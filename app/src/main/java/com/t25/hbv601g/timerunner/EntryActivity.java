@@ -6,6 +6,8 @@ import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.t25.hbv601g.timerunner.entities.Entry;
@@ -67,6 +69,29 @@ public class EntryActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Entry ID: " + entryID);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            return returnToAttendanceListPage();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            return returnToAttendanceListPage();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean returnToAttendanceListPage() {
+        Intent intent = new Intent(EntryActivity.this, AttendanceListActivity.class);
+        EntryActivity.this.startActivity(intent);
+        this.finish();
+        return true;
     }
 
     private static String getDate(long milliSeconds, String dateFormat)
